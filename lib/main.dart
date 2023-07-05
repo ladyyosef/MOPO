@@ -108,7 +108,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute:Xrp.id,
+      initialRoute:Get_Start.id,
       routes: {
         Get_Start.id: (context) => Get_Start(),
         Pages.id: (context) => Pages(),
@@ -135,10 +135,7 @@ class MyApp extends StatelessWidget {
         Profile1.id: (context) => Profile1(),
         Profile2.id: (context) => Profile2(),
         Profile3.id: (context) => Profile3(),
-        Profile4.id: (context) => Profile4(),
-        Profile5.id: (context) => Profile5(),
-        Profile6.id: (context) => Profile6(),
-        Profile7.id: (context) => Profile7(),
+     
         Profile8.id: (context) => Profile8(),
         Recevie.id: (context) => Recevie(),
         RecevieVar1.id: (context) => RecevieVar1(),

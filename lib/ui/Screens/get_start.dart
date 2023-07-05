@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_application_2/ui/Screens/profile1.dart';
 
 import 'package:flutter_application_2/ui/widegets/custom_appbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widegets/Pages.dart';
 import 'admin_wallet1.dart';
@@ -98,9 +99,18 @@ class Get_Start extends StatelessWidget {
                         ),
                       ),
                       onPressed: () async {
-                        Navigator.of(context).popUntil(
-                            (route) => route.settings.name == Profile1.id);
-                        Navigator.pushNamed(context, Profile1.id);
+                        SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
+                        final token = sharedPreferences.getString('token');
+                        if (token != null){
+     Navigator.of(context).popUntil(
+                            (route) => route.settings.name == Home.id);
+                        Navigator.pushNamed(context, Pages.id);
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (_)=>Profile1()));
+                        }
+
+                   
                       },
                       child: Center(
                         child: Text('Get start',

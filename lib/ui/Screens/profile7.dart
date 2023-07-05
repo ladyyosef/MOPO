@@ -14,8 +14,13 @@ import '../widegets/Pages.dart';
 import 'home.dart';
 
 class Profile7 extends StatelessWidget {
-  const Profile7({Key? key}) : super(key: key);
+  const Profile7({Key? key,required this.email,required this.fullName,required this.birthdate, required this.password}) : super(key: key);
     static String id = "Profile7";
+     final String email;
+  final String password;
+  final String fullName;
+  final String birthdate;
+
 
   @override
   Widget build(BuildContext context) {

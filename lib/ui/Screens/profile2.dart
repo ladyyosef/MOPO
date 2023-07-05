@@ -1,12 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/ui/Screens/controllers/RegisterController.dart';
 import 'package:flutter_application_2/ui/Screens/link_api.dart';
 import 'package:flutter_application_2/ui/Screens/profile1.dart';
 import 'package:flutter_application_2/ui/Screens/profile3.dart';
+import 'package:flutter_application_2/ui/Screens/profile4.dart';
 import 'package:flutter_application_2/ui/Screens/profile8.dart';
 import 'package:flutter_application_2/ui/widegets/custom_scaffold.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/controllers/api_controller.dart';
 import '../widegets/Pages.dart';
 import 'home.dart';
 
@@ -18,20 +23,35 @@ class Profile2 extends StatelessWidget {
   static String id = "Profile2";
   RegisterController curd = RegisterController();
   login(BuildContext context) async {
-    var response = await curd.postReequest(LinkLogin,
-        {"email": emailController.text, "password": passwordController.text});
-    if (response['status'] == "success") {
-      Navigator.of(context)
-          .popUntil((route) => route.settings.name == Profile8.id);
-      Navigator.pushNamed(context, Profile8.id);
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Profile4()));
-    } else {
-      AwesomeDialog(
-              context: context,
-              title: "warning",
-              body: Text("the password not corect"))
-          .show();
-      }
+    final r = await ApiController.post(
+      endpoint: "login",
+      body: {
+        "email": emailController.text,
+        "password": passwordController.text
+      },
+      onError: (statusCode, body) {
+
+      },
+    );
+    print(r);
+    Map<String, dynamic> data = jsonDecode(r);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setString('token', data['token']);
+    Navigator.push(context, MaterialPageRoute(builder: (_)=>Profile8()));
+    // var response = await curd.postReequest(LinkLogin,
+    //     {"email": emailController.text, "password": passwordController.text});
+    // if (response['status'] == "success") {
+    //   Navigator.of(context)
+    //       .popUntil((route) => route.settings.name == Profile8.id);
+    //   Navigator.pushNamed(context, Profile8.id);
+    //   // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Profile4()));
+    // } else {
+    //   AwesomeDialog(
+    //           context: context,
+    //           title: "warning",
+    //           body: Text("the password not corect"))
+    //       .show();
+    //   }
   }
 
   bool validateFields() {
@@ -174,6 +194,7 @@ class Profile2 extends StatelessWidget {
                   onPressed: () async {
                     if (validateFields()) {
                       await login(context);
+
                     }
                   },
                   child: Text(

@@ -15,8 +15,8 @@ import 'home.dart';
 import 'link_api.dart';
 
 class Profile5 extends StatelessWidget {
-  Profile5({Key? key}) : super(key: key);
-    RegisterController _crud = RegisterController();
+  Profile5({Key? key,required this.email,required this.password}) : super(key: key);
+   RegisterController _crud = RegisterController();
   final _formKey = GlobalKey<FormState>();
 
   var fullNameController = TextEditingController();
@@ -24,6 +24,9 @@ class Profile5 extends StatelessWidget {
   List<String> itemsList = ['syria', 'lebanon'];
   String dropdownvalue = 'syria';
       static String id = "Profile5";
+      final String email;
+    final String password;
+
        SingUp(BuildContext context) async {
     var response = await _crud.postReequest(LinkRegister, {
       "userName": fullNameController.text,
@@ -210,9 +213,8 @@ Navigator.pushNamed(context, Profile4.id);
                 print(fullNameController.text);
                 print(birthDateController.text);
               
-                     Navigator.of(context).popUntil((route) => route.settings.name == Profile6.id);
-Navigator.pushNamed(context, Profile6.id);  
-                  
+                 Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Profile6(email: email,password: password,birthdate: birthDateController.text,fullName:fullNameController.text ,)));
               },
               child: Text(
                 'next',

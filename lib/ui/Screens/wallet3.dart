@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -29,7 +31,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_application_2/ui/widegets/custom_appbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/controllers/api_controller.dart';
 import '../widegets/Pages.dart';
 import 'home.dart';
 
@@ -41,10 +45,54 @@ class Wallet3 extends StatelessWidget {
         var ExpirController = TextEditingController();
             var NameController = TextEditingController();
     static String id = "Wallet3";
+    AddCard(BuildContext context) async {
+    final r = await ApiController.post(
+      endpoint: "card",
+      body: {
+       "Card_number":CardController.text,
+       "Cvc":CvcController.text,
+       "Expire_Date":ExpirController.text,
+       "Holder_Name":NameController.text,
+
+      },
+      onError: (statusCode, body) {
+
+      },
+    );
+    print(r);
+    Map<String, dynamic> data = jsonDecode(r);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setString('token', data['token']);
+    Navigator.push(context, MaterialPageRoute(builder: (_)=>Wallet4()));
+   
+  }
+bool validateFields() {
+    if (CardController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
+      return false;
+    }
+
+    if (CvcController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
+      return false;
+    }
+if (ExpirController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
+      return false;
+    }
+if (NameController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
+      return false;
+    }
+
+    // إذا وصلت هنا، فإن جميع الحقول غير فارغة
+    return true;
+  }
 
 
 
   @override
+  
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
@@ -300,10 +348,11 @@ Navigator.pushNamed(context, Wallet2.id);
                 borderRadius: BorderRadius.circular(15),
                   ),
                   child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).popUntil((route) => route.settings.name ==Wallet4.id);
-Navigator.pushNamed(context, Wallet4.id); 
-                       
+                  onPressed: () async {
+                    if (validateFields()) {
+                      await AddCard(context);
+
+                    }
                   },
                   child: Text(
                     'Next',

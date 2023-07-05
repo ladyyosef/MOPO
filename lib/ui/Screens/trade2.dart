@@ -91,8 +91,9 @@ Navigator.pushNamed(context, Pages.id);
                   color: Color(0xFFFFFFFF),
                   border: Border(
                     bottom: BorderSide(
-                      //                    <--- top side
-                      color: Color(0xFF6C696F),
+                      //          
+                      //          <--- top side
+                        color: Color(0xFF4B0B8A),
 
                       width: 3.0,
                     ),
@@ -109,7 +110,7 @@ Navigator.pushNamed(context, Pages.id);
                     child: Text(
                       'Your Offers',
                       style: GoogleFonts.inter(
-                        color: Color(0xFF6C696F),
+                        color: Color(0xFF4B0B8A),
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -124,7 +125,7 @@ Navigator.pushNamed(context, Pages.id);
                   border: Border(
                     bottom: BorderSide(
                       //                    <--- top side
-                      color: Color(0xFF4B0B8A),
+                      color: Color(0xFF6C696F),
 
                       width: 3.0,
                     ),
@@ -139,7 +140,8 @@ Navigator.pushNamed(context, Trade1.id);  },
                     child: Text(
                       'Offers',
                       style: GoogleFonts.inter(
-                        color: Color(0xFF4B0B8A),
+                                             color: Color(0xFF6C696F),
+
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),

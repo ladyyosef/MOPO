@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/ui/Screens/profile1.dart';
 import 'package:flutter_application_2/ui/Screens/profile4.dart';
+import 'package:flutter_application_2/ui/Screens/profile5.dart';
 import 'package:flutter_application_2/ui/widegets/custom_scaffold.dart';
 
 import '../widegets/Pages.dart';
@@ -15,7 +16,7 @@ import 'link_api.dart';
 
 class Profile3 extends StatelessWidget {
   Profile3({Key? key}) : super(key: key);
-  RegisterController _crud = RegisterController();
+ // RegisterController _crud = RegisterController();
 
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -35,20 +36,21 @@ class Profile3 extends StatelessWidget {
 
 //                     }
 //   }
-// bool validateFields() {
-//   if (emailController.text.isEmpty) {
-//     // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
-//     return false;
-//   }
+  bool validateFields() {
+    if (emailController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
+      return false;
+    }
 
-//   if (passwordController.text.isEmpty) {
-//     // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
-//     return false;
-//   }
+    if (passwordController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
+      return false;
+    }
 
-//   // إذا وصلت هنا، فإن جميع الحقول غير فارغة
-//   return true;
-// }
+    // إذا وصلت هنا، فإن جميع الحقول غير فارغة
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -169,14 +171,13 @@ class Profile3 extends StatelessWidget {
             ),
             child: MaterialButton(
               onPressed: () async {
-                // if (validateFields()) {
-                //   await SingUp(context
-                // );
-
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>Profile4()));
+                if (validateFields()) {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Profile5(email: emailController.text,password: passwordController.text,)));
+                }
               },
               child: Text(
-                'Creat personal Account',
+                'Countinu',
                 style: TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 255, 255, 255),

@@ -13,6 +13,8 @@ import 'package:flutter_application_2/ui/Screens/usdt.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_application_2/ui/widegets/second_appbar.dart';
 import '../Screens/home.dart';
+import '../Screens/profile8.dart';
+import '../Screens/wallet1.dart';
 import '../widegets/Nav.dart';
 import '../widegets/h_appbar.dart';
 import '../widegets/home_appbar.dart';
@@ -32,8 +34,8 @@ class _PagesState extends State<Pages> {
   List<Widget> pages = const[
     Home(),
     Market1(),
-     Wallet6(),
-      Profile1(),
+    Wallet1(),
+    Profile8(),
   ];
        
 

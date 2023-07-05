@@ -11,10 +11,14 @@ import '../widegets/Pages.dart';
 import 'home.dart';
 
 class Profile4 extends StatelessWidget {
-  Profile4({Key? key}) : super(key: key);
+  Profile4({Key? key,required this.email,required this.password}) : super(key: key);
   var VerificationController = TextEditingController();
 
   static String id = "Profile4";
+  final String email;
+    final String password;
+
+
 
   @override
   Widget build(BuildContext context) {

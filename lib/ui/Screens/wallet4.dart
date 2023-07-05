@@ -132,9 +132,11 @@ Navigator.pushNamed(context, Wallet3.id);
                     ),
                     child: TextButton(
                     onPressed: () {
-                     Navigator.of(context).popUntil((route) => route.settings.name ==Wallet5.id);
-Navigator.pushNamed(context, Wallet5.id); 
-                       
+                                            Navigator.push(context, MaterialPageRoute(builder: (_)=>Wallet5
+                                            
+                                            
+                                            ()));
+
                     },
                     child: Text(
                       'Next',
