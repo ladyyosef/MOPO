@@ -1,168 +1,284 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-// Widget cours({
-//   required int courseId,
-//   required ImageProvider coursImage,
-//   required String coursName,
-//   String? instutName,
-//   required bool isFree,
-// }) =>
-//     _Cours(
-//       courseId: courseId,
-//       coursImage: coursImage,
-//       coursName: coursName,
-//       instutName: instutName!,
-//       isFree: isFree,
-//     );
+import '../../widegets/Pages.dart';
+import '../controllers/logoutController.dart';
+import '../home.dart';
 
-// class _Cours extends StatelessWidget {
-//   final int courseId;
+Widget ShowUser1({
+  required String userName,
+  // required Image profileImagee,
+  required String password,
+  required String phone,
+   required String email,
+}) =>
+    _User(
+      userName: userName,
+      //profileImage: profileImagee,
+      password: password,
+      phone: phone,
+      email:email,
+    );
 
-//   const _Cours({
-//     required this.coursImage,
-//     required this.coursName,
-//     required this.instutName,
-//     required this.isFree,
-//     required this.courseId,
-//   });
+class _User extends StatelessWidget {
+  const _User(
+      {key,
+      required this.password,
+      required this.userName,
+      required this.phone,
+      required this.email
+      });
 
-//   final ImageProvider coursImage;
-//   final String coursName;
-//   final String instutName;
-//   final bool isFree;
+  final String userName;
+  final String password;
+  final String phone;
+final String email;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: GestureDetector(
-//         onTap: () {
-//           Navigator.push(
-//             context,
-//             MaterialPageRoute(
-//                 builder: (context) => Details(
-//                       CoursId: courseId,
-//                     )),
-//           );
-//         },
-//         child: Padding(
-//           padding: const EdgeInsets.all(10.0),
-//           child: Container(
-//             height: 215,
-//             width: 155,
-//             decoration: BoxDecoration(
-//               color: Colors.white,
-//               borderRadius: BorderRadius.circular(20),
-//               boxShadow: [
-//                 BoxShadow(
-//                     color: Colors.grey.withOpacity(0.5),
-//                     spreadRadius: 2,
-//                     blurRadius: 4,
-//                     offset: Offset(0, 0)),
-//               ],
-//             ),
-//             child: Column(
-//               mainAxisSize: MainAxisSize.min,
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Padding(
-//                   padding: const EdgeInsets.all(2.0),
-//                   child: Stack(
-//                     children: [
-//                       Container(
-//                         decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(20),
-//                         ),
-//                         clipBehavior: Clip.antiAliasWithSaveLayer,
-//                         child: Image(
-//                           image: coursImage,
-//                           fit: BoxFit.cover,
-//                           width: 150,
-//                           height: 125,
-//                         ),
-//                       ),
-//                       Container(
-//                         width: 44,
-//                         height: 25,
-//                         decoration: BoxDecoration(
-//                             borderRadius: const BorderRadius.only(
-//                               topRight: Radius.circular(16),
-//                               bottomLeft: Radius.circular(16),
-//                             ),
-//                             color: isFree
-//                                 ? const Color(0xffFF0F00).withOpacity(0.5)
-//                                 : null),
-//                       ),
-//                       Padding(
-//                         padding: const EdgeInsets.all(3.0),
-//                         child: Container(
-//                           width: 44,
-//                           height: 25,
-//                           decoration: BoxDecoration(
-//                               borderRadius: const BorderRadius.only(
-//                                 topRight: Radius.circular(16),
-//                                 bottomLeft: Radius.circular(16),
-//                               ),
-//                               color: isFree
-//                                   ? const Color(0xffFF0F00).withOpacity(0.5)
-//                                   : null),
-//                           child: Text(
-//                             isFree ? 'مجاني' : '',
-//                             textAlign: TextAlign.center,
-//                             style: const TextStyle(
-//                               color: Colors.black,
-//                               fontFamily: 'cairo',
-//                               fontWeight: FontWeight.w600,
-//                               fontSize: 12,
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//                 Expanded(
-//                   child: Center(
-//                     child: Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: Text(
-//                         coursName,
-//                         maxLines: 1,
-//                         overflow: TextOverflow.ellipsis,
-//                         style: const TextStyle(
-//                           color: Colors.black,
-//                           fontFamily: 'cairo',
-//                           fontWeight: FontWeight.w900,
-//                           fontSize: 16,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//                 Expanded(
-//                   child: Center(
-//                     child: Padding(
-//                       padding: const EdgeInsets.all(7.0),
-//                       child: Text(
-//                         instutName,
-//                         maxLines: 1,
-//                         textAlign: TextAlign.start,
-//                         overflow: TextOverflow.ellipsis,
-//                         style: const TextStyle(
-//                           color: Colors.black,
-//                           fontFamily: 'cairo',
-//                           fontWeight: FontWeight.w300,
-//                           fontSize: 14,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Container(
+        width: 425,
+        height: 55,
+        color: Colors.white,
+        child: Row(
+          children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .popUntil((route) => route.settings.name == Home.id);
+                  Navigator.pushNamed(context, Pages.id);
+                },
+                icon: Icon(Icons.arrow_back)),
+            SizedBox(
+              width: 180.0,
+            ),
+            Center(
+              child: Container(
+                  width: 120,
+                  height: 100,
+                  child: Image.asset('assets/images/LogoHome.png')),
+            )
+          ],
+        ),
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      Stack(
+        children: [
+          CircleAvatar(
+            radius: 50,
+            backgroundColor: Colors.grey[300],
+             backgroundImage: NetworkImage('https://example.com/profile-image.png'),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                // اضف هنا الكود الذي يفتح شاشة جديدة لتحميل الصورة الجديدة
+              },
+            ),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      Center(
+        child: Container(
+          //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+          child: Text(
+                userName,
+            style: GoogleFonts.lexendExa(
+                fontSize: 20,
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+      SizedBox(
+        height: 45,
+      ),
+      Image.asset('assets/images/line8.png'),
+      Column(
+        children: [
+          Container(
+            padding: EdgeInsets.only(top: 15, bottom: 20, right: 25, left: 25),
+            child: Row(
+              children: [
+                Icon(Icons.account_box_outlined, color: Color(0xFF4B0B8A)),
+                Container(
+                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                  child: Text(
+                    'Name',
+                    style: GoogleFonts.lexendExa(
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  width: 100,
+                ),
+                Container(
+                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                  child: Text(
+               userName,
+                    style: GoogleFonts.lexendExa(
+                        fontSize: 12,
+                        color: Color(0xFF4B0B8A),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Image.asset('assets/images/line8.png'),
+          Container(
+            padding: EdgeInsets.only(top: 15, bottom: 20, right: 25, left: 25),
+            child: Row(
+              children: [
+                Icon(Icons.email, color: Color(0xFF4B0B8A)),
+                Container(
+                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                  child: Text(
+                    'Email',
+                    style: GoogleFonts.lexendExa(
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  width: 90,
+                ),
+                Container(
+                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                  child: Text(
+                   email,
+                    style: GoogleFonts.lexendExa(
+                        fontSize: 12,
+                        color: Color(0xFF4B0B8A),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Image.asset('assets/images/line8.png'),
+          Container(
+            padding: EdgeInsets.only(top: 15, bottom: 20, right: 25, left: 25),
+            child: Row(
+              children: [
+                Icon(Icons.phone, color: Color(0xFF4B0B8A)),
+                Container(
+                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                  child: Text(
+                    'Phone number',
+                    style: GoogleFonts.lexendExa(
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  width: 90,
+                ),
+                Container(
+                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                  child: Text(
+                    phone,
+                    style: GoogleFonts.lexendExa(
+                        fontSize: 12,
+                        color: Color(0xFF4B0B8A),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Image.asset('assets/images/line8.png'),
+          Container(
+            padding: EdgeInsets.only(top: 15, bottom: 20, right: 25, left: 25),
+            child: Row(
+              children: [
+                Icon(Icons.key_outlined, color: Color(0xFF4B0B8A)),
+                Container(
+                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                  child: Text(
+                    'Password',
+                    style: GoogleFonts.lexendExa(
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  width: 120,
+                ),
+                Container(
+                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                  child: Text(
+                    password,
+                    style: GoogleFonts.lexendExa(
+                        fontSize: 12,
+                        color: Color(0xFF4B0B8A),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Image.asset('assets/images/line8.png'),
+          GestureDetector(
+            child: Container(
+              padding:
+                  EdgeInsets.only(top: 15, bottom: 20, right: 25, left: 25),
+              child: Row(
+                children: [
+                  Icon(Icons.exit_to_app, color: Color(0xFF4B0B8A)),
+                  Container(
+                    //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                    child: Text(
+                      'Log out',
+                      style: GoogleFonts.lexendExa(
+                          fontSize: 12,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            onTap: () async {
+              await logoutController;
+            },
+          ),
+          Image.asset('assets/images/line8.png'),
+          Container(
+            padding: EdgeInsets.only(top: 15, bottom: 20, right: 25, left: 25),
+            child: Row(
+              children: [
+                Icon(Icons.settings, color: Color(0xFF4B0B8A)),
+                Container(
+                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
+                  child: Text(
+                    'Settings',
+                    style: GoogleFonts.lexendExa(
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ]);
+  }
+}

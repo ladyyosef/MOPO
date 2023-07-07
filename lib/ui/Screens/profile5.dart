@@ -1,6 +1,7 @@
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_2/ui/Screens/profile3.dart';
 import 'package:flutter_application_2/ui/Screens/profile4.dart';
 import 'package:flutter_application_2/ui/Screens/profile6.dart';
 import 'package:flutter_application_2/ui/widegets/custom_scaffold.dart';
@@ -20,9 +21,9 @@ class Profile5 extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   var fullNameController = TextEditingController();
-  var birthDateController = TextEditingController();
-  List<String> itemsList = ['syria', 'lebanon'];
-  String dropdownvalue = 'syria';
+  var phoneController = TextEditingController();
+    var BirthDateController = TextEditingController();
+
       static String id = "Profile5";
       final String email;
     final String password;
@@ -49,6 +50,22 @@ void _submitForm() {
       // Navigator.pushNamed(context, Profile6.id);
     }
   }
+  bool validateFields() {
+    if (fullNameController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
+      return false;
+    }
+
+    if (phoneController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
+      return false;
+    }
+
+    // إذا وصلت هنا، فإن جميع الحقول غير فارغة
+    return true;
+  }
+
+  
 
 
   @override
@@ -62,8 +79,8 @@ void _submitForm() {
                     child: Row(
                       children: [
                                IconButton(onPressed: (){
-                                Navigator.of(context).popUntil((route) => route.settings.name == Profile4.id);
-Navigator.pushNamed(context, Profile4.id);  
+                                 Navigator.push(context, MaterialPageRoute(builder: (_) => Profile3()));
+ 
                                }, icon:Icon(Icons.arrow_back)),
 
 
@@ -166,6 +183,45 @@ Navigator.pushNamed(context, Profile4.id);
           Container(
             padding: EdgeInsets.only(top: 1, bottom: 10, right: 230, left: 10),
             child: Text(
+              'Phone Number',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xFF4B0B8A),
+                  fontWeight: FontWeight.bold
+                ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            width: 340,
+            height: 60,
+            child: TextFormField(
+              controller: phoneController,
+              keyboardType: TextInputType.number,
+              obscureText: false,
+              onFieldSubmitted: (String value) {
+                print(value);
+              },
+              onChanged: (String value) {
+                print(value);
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(19),
+                ),
+                // labelText: 'password',
+                suffix: Icon(Icons.show_chart_outlined),
+              ),
+            ),
+          ),
+             SizedBox(
+            height: 10,
+          ),
+                    Container(
+            padding: EdgeInsets.only(top: 1, bottom: 10, right: 230, left: 10),
+            child: Text(
               'Birth Date',
               style: TextStyle(
                   fontSize: 20,
@@ -181,8 +237,8 @@ Navigator.pushNamed(context, Profile4.id);
             width: 340,
             height: 60,
             child: TextFormField(
-              controller: birthDateController,
-              keyboardType: TextInputType.datetime,
+              controller: BirthDateController,
+              keyboardType: TextInputType.number,
               obscureText: false,
               onFieldSubmitted: (String value) {
                 print(value);
@@ -200,7 +256,7 @@ Navigator.pushNamed(context, Profile4.id);
             ),
           ),
           SizedBox(
-            height: 70,
+            height: 40,
           ),
           Container(
            width: 280,
@@ -211,10 +267,15 @@ Navigator.pushNamed(context, Profile4.id);
             child: MaterialButton(
               onPressed: () {
                 print(fullNameController.text);
-                print(birthDateController.text);
+                print(phoneController.text);
+                if (validateFields()) {
+                         Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Profile6(email: email,password: password,phone: phoneController.text,fullName:fullNameController.text ,birthDate:BirthDateController.text,//Nationality:selectedGender
+                      )));
+
+                    }
               
-                 Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Profile6(email: email,password: password,birthdate: birthDateController.text,fullName:fullNameController.text ,)));
+             
               },
               child: Text(
                 'next',

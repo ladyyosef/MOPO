@@ -20,6 +20,8 @@ class Profile7 extends StatelessWidget {
   final String password;
   final String fullName;
   final String birthdate;
+  
+
 
 
   @override

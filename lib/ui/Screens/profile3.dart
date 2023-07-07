@@ -1,5 +1,7 @@
 //import 'dart:js';
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -7,8 +9,11 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/ui/Screens/profile1.dart';
 import 'package:flutter_application_2/ui/Screens/profile4.dart';
 import 'package:flutter_application_2/ui/Screens/profile5.dart';
+import 'package:flutter_application_2/ui/Screens/profile8.dart';
 import 'package:flutter_application_2/ui/widegets/custom_scaffold.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/controllers/api_controller.dart';
 import '../widegets/Pages.dart';
 import 'controllers/RegisterController.dart';
 import 'home.dart';
@@ -16,10 +21,13 @@ import 'link_api.dart';
 
 class Profile3 extends StatelessWidget {
   Profile3({Key? key}) : super(key: key);
- // RegisterController _crud = RegisterController();
+  // RegisterController _crud = RegisterController();
 
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var phoneController = TextEditingController();
+  var PostalCodeController = TextEditingController();
+  var CityController = TextEditingController();
   static String id = "Profile3";
 //   SingUp(BuildContext context) async {
 //     var response = await _crud.postReequest(LinkRegister, {
@@ -36,6 +44,39 @@ class Profile3 extends StatelessWidget {
 
 //                     }
 //   }
+  register(BuildContext context) async {
+    final r = await ApiController.post(
+      endpoint: "register",
+      body: {
+        "email": emailController.text,
+        "password": passwordController.text,
+        "phone": phoneController.text,
+        "postal_code": PostalCodeController.text,
+        "City": CityController.text
+      },
+      onError: (statusCode, body) {},
+    );
+    print(r);
+    Map<String, dynamic> data = jsonDecode(r);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setString('token', data['token']);
+    Navigator.push(context, MaterialPageRoute(builder: (_) => Profile8()));
+    // var response = await curd.postReequest(LinkLogin,
+    //     {"email": emailController.text, "password": passwordController.text});
+    // if (response['status'] == "success") {
+    //   Navigator.of(context)
+    //       .popUntil((route) => route.settings.name == Profile8.id);
+    //   Navigator.pushNamed(context, Profile8.id);
+    //   // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Profile4()));
+    // } else {
+    //   AwesomeDialog(
+    //           context: context,
+    //           title: "warning",
+    //           body: Text("the password not corect"))
+    //       .show();
+    //   }
+  }
+
   bool validateFields() {
     if (emailController.text.isEmpty) {
       // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
@@ -173,11 +214,16 @@ class Profile3 extends StatelessWidget {
               onPressed: () async {
                 if (validateFields()) {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Profile5(email: emailController.text,password: passwordController.text,)));
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => Profile5(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              )));
                 }
               },
               child: Text(
-                'Countinu',
+                'Continue',
                 style: TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 255, 255, 255),

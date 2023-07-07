@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -8,24 +10,82 @@ import 'package:flutter_application_2/ui/widegets/custom_scaffold.dart';
 import 'package:flutter_application_2/ui/widegets/custom_dropdownbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/controllers/api_controller.dart';
 import '../widegets/Drop2.dart';
 import '../widegets/Pages.dart';
 import 'home.dart';
 
 class Profile6 extends StatelessWidget {
-  Profile6({Key? key, required this.email,required this.fullName,required this.birthdate, required this.password})
+  Profile6(
+      {Key? key,
+      required this.email,
+      required this.fullName,
+      required this.phone,
+      required this.password,
+      required this.birthDate, //required this.Nationality
+       })
       : super(key: key);
-  var fullNameController = TextEditingController();
-  var birthDateController = TextEditingController();
+  var PostalCodeController = TextEditingController();
+  var CityController = TextEditingController();
   List<String> itemsList = ['syria', 'lebanon'];
   String dropdownvalue = 'syria';
   static String id = "Profile6";
   final String email;
   final String password;
   final String fullName;
-  final String birthdate;
+  final String phone;
+  final String birthDate;
+  //final String Nationality;
+  register(BuildContext context) async {
+    final r = await ApiController.post(
+      endpoint: "register",
+      body: {
+        "email": email,
+        "password": password,
+        "user_name": fullName,
+        "phone": phone,
+        "postal_code": PostalCodeController.text,
+        "City": CityController.text
+      },
+      onError: (statusCode, body) {},
+    );
+    print(r);
+    Map<String, dynamic> data = jsonDecode(r);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setString('token', data['token']);
+    Navigator.push(context, MaterialPageRoute(builder: (_) => Profile8()));
+    // var response = await curd.postReequest(LinkLogin,
+    //     {"email": emailController.text, "password": passwordController.text});
+    // if (response['status'] == "success") {
+    //   Navigator.of(context)
+    //       .popUntil((route) => route.settings.name == Profile8.id);
+    //   Navigator.pushNamed(context, Profile8.id);
+    //   // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Profile4()));
+    // } else {
+    //   AwesomeDialog(
+    //           context: context,
+    //           title: "warning",
+    //           body: Text("the password not corect"))
+    //       .show();
+    //   }
+  }
 
+  bool validateFields() {
+    if (PostalCodeController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
+      return false;
+    }
+
+    if (CityController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
+      return false;
+    }
+
+    // إذا وصلت هنا، فإن جميع الحقول غير فارغة
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +170,8 @@ class Profile6 extends StatelessWidget {
             width: 340,
             height: 60,
             child: TextFormField(
-              controller: fullNameController,
-              keyboardType: TextInputType.name,
+              controller: PostalCodeController,
+              keyboardType: TextInputType.number,
               // obscureText: true,
               onFieldSubmitted: (String value) {
                 print(value);
@@ -149,8 +209,8 @@ class Profile6 extends StatelessWidget {
             width: 340,
             height: 60,
             child: TextFormField(
-              controller: birthDateController,
-              keyboardType: TextInputType.datetime,
+              controller: CityController,
+              keyboardType: TextInputType.name,
               obscureText: true,
               onFieldSubmitted: (String value) {
                 print(value);
@@ -178,13 +238,10 @@ class Profile6 extends StatelessWidget {
               color: Color(0xFF4B0B8A),
             ),
             child: MaterialButton(
-              onPressed: () {
-                print(fullNameController.text);
-                print(birthDateController.text);
-
-               
-                 Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Profile8()));
+              onPressed: () async {
+                if (validateFields()) {
+                  await register(context);
+                }
               },
               child: Text(
                 'next',

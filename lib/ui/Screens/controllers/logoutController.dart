@@ -25,7 +25,7 @@ void logoutController(BuildContext context) async {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (_) => Logout(),
+        builder: (_) => Profile1(),
       ),
     );
 

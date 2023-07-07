@@ -13,7 +13,7 @@ class ShowUserController {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final response = await http.get(
-      Uri.parse('http://127.0.0.1:8000/api/user/5'),
+      Uri.parse('http://127.0.0.1:8000/api/ur'),
       headers: {
         'accept': 'application/json',
         HttpHeaders.authorizationHeader: 'Bearer $token'

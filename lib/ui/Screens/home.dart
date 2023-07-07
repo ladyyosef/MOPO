@@ -475,7 +475,19 @@ class Home extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset("assets/images/LitMarket.png"),
+                         Container(
+            decoration: BoxDecoration(border: Border.all( color: Color(0xFFFAFF00),width: 2 ),borderRadius: BorderRadius.circular(30)),
+            child: CircleAvatar(
+              maxRadius: 25,
+              minRadius: 25,
+              
+              backgroundColor: Colors.white,
+              child: Icon(Icons.monetization_on,size: 25,color: Color(0xFF4B0B8A),),
+              
+          
+            ),
+            
+          ),
                             Container(
                               padding: EdgeInsets.only(
                                   top: 15, bottom: 8, right: 5, left: 10),
@@ -536,9 +548,8 @@ class Home extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context)
-                            .popUntil((route) => route.settings.name == Lit.id);
-                        Navigator.pushNamed(context, Lit.id);
+                         Navigator.push(
+                      context, MaterialPageRoute(builder: (_) =>Lit()));
                       }),
                   SizedBox(
                     height: 10,
@@ -554,7 +565,19 @@ class Home extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset("assets/images/UsdtMarket.png"),
+                        Container(
+            decoration: BoxDecoration(border: Border.all( color: Color(0xFFFAFF00),width: 2 ),borderRadius: BorderRadius.circular(30)),
+            child: CircleAvatar(
+              maxRadius: 25,
+              minRadius: 25,
+              
+              backgroundColor: Colors.white,
+              child: Icon(Icons.monetization_on,size: 25,color: Color(0xFF4B0B8A),),
+              
+          
+            ),
+            
+          ),
                           Container(
                             padding: EdgeInsets.only(
                                 top: 15, bottom: 8, right: 5, left: 10),
@@ -614,9 +637,8 @@ class Home extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.of(context)
-                          .popUntil((route) => route.settings.name == Usdt.id);
-                      Navigator.pushNamed(context, Usdt.id);
+                     Navigator.push(
+                      context, MaterialPageRoute(builder: (_) =>Usdt()));
                     },
                   ),
                 ],

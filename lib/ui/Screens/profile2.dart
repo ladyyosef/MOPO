@@ -21,7 +21,7 @@ class Profile2 extends StatelessWidget {
   var passwordController = TextEditingController();
   //String Function(String) val;
   static String id = "Profile2";
-  RegisterController curd = RegisterController();
+  
   login(BuildContext context) async {
     final r = await ApiController.post(
       endpoint: "login",

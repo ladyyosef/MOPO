@@ -16,6 +16,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widegets/Pages.dart';
 import 'buy.dart';
 import 'market1.dart';
+import 'nav_pages/line.dart';
+import 'nav_pages/price_point.dart';
 import 'nav_pages/test1.dart';
 
 class Neo extends StatelessWidget {
@@ -135,8 +137,24 @@ Navigator.pushNamed(context, Pages.id);
             ),
           ),
         ],
+      ), Container(
+      
+        child: Center(
+          child: LineChartWidget(
+            points: [
+              PricePoint(x: 0, y: 1),
+              PricePoint(x: 1, y: 2),
+              PricePoint(x: 2, y: 7),
+              PricePoint(x: 2, y: 3),
+              PricePoint(x: 3, y: 9),
+            ],
+            width: 250,
+            height: 500,
+            lineColor: Color(0xFF4B0B8A),
+            lineWidth: 4,
+          ),
+        ),
       ),
-           ff(),
 
       Container(
         padding: EdgeInsets.only(top: 20, bottom: 30, right: 180, left: 10),

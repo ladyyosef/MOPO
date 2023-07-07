@@ -40,10 +40,10 @@ import 'home.dart';
 
 class Wallet3 extends StatelessWidget {
    Wallet3({key});
-   var CvcController = TextEditingController();
-    var CardController = TextEditingController();
-        var ExpirController = TextEditingController();
-            var NameController = TextEditingController();
+  var CvcController = TextEditingController();
+  var CardController = TextEditingController();
+  var ExpirController = TextEditingController();
+  var NameController = TextEditingController();
     static String id = "Wallet3";
     AddCard(BuildContext context) async {
     final r = await ApiController.post(
