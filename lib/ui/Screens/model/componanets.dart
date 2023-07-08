@@ -9,14 +9,14 @@ import '../home.dart';
 Widget ShowUser1({
   required String userName,
   // required Image profileImagee,
-  required String password,
+ 
   required String phone,
    required String email,
 }) =>
     _User(
       userName: userName,
       //profileImage: profileImagee,
-      password: password,
+      
       phone: phone,
       email:email,
     );
@@ -24,14 +24,13 @@ Widget ShowUser1({
 class _User extends StatelessWidget {
   const _User(
       {key,
-      required this.password,
+     
       required this.userName,
       required this.phone,
       required this.email
       });
 
   final String userName;
-  final String password;
   final String phone;
 final String email;
 
@@ -220,16 +219,7 @@ final String email;
                 SizedBox(
                   width: 120,
                 ),
-                Container(
-                  //padding: EdgeInsets.only(top: 35, bottom: 10, right: 100, left: 5),
-                  child: Text(
-                    password,
-                    style: GoogleFonts.lexendExa(
-                        fontSize: 12,
-                        color: Color(0xFF4B0B8A),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+             
               ],
             ),
           ),

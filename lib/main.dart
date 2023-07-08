@@ -160,7 +160,7 @@ class MyApp extends StatelessWidget {
         Usdt.id: (context) => Usdt(),
         Wallet1.id: (context) => Wallet1(),
         Wallet2.id: (context) => Wallet2(),
-        Wallet3.id: (context) => Wallet3(),
+
         Wallet4.id: (context) => Wallet4(),
         // Wallet5.id:(context) => Wallet5(),
         Wallet6.id: (context) => Wallet6(),

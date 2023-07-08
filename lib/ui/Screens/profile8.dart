@@ -26,7 +26,7 @@ class Profile8 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      child: FutureBuilder<List<ShowUser>>(
+      child: FutureBuilder<ShowUser>(
           future: ShowUserController.getUser(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
@@ -34,18 +34,13 @@ class Profile8 extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            final users = snapshot.data!;
-            return Column(children: users
-            .map((ShowUser) => ShowUser1(
-      userName: ShowUser.userName,
-    
-      password:ShowUser. password,
-      phone: ShowUser.phone,
-      email:ShowUser.email,
-              )).toList(),
-           );
+            final user = snapshot.data!;
+            return ShowUser1(
+              userName: user.fullName,
+              phone: user.phone,
+              email: user.email,
+            );
           }),
     );
-    
   }
 }

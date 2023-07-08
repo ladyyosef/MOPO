@@ -24,29 +24,38 @@ class ShowAccount {
   }
 }
 
+
+
+
 class ShowUser {
-  String userName;
+  String fullName;
   String email;
-  String password;
   String phone;
   String profileImage;
 
   ShowUser({
-    required this.userName,
+    required this.fullName,
     required this.email,
-    required this.password,
     required this.phone,
     required this.profileImage,
   });
 
   factory ShowUser.fromJson(Map<String, dynamic> json) {
     return ShowUser(
-      userName: json['user_name'],
+      fullName: json['Full_name'],
       email: json['email'],
-      password: json['password'],
       phone: json['phone'],
       profileImage: json['Profile_image'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'Full_name': fullName,
+      'email': email,
+      'phone': phone,
+      'Profile_image': profileImage,
+    };
   }
 }
 class Card {

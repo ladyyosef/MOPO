@@ -44,6 +44,7 @@ class Wallet2 extends StatefulWidget {
 
 class _Wallet2State extends State<Wallet2> {
   Color borderColor = Color(0xFF4B0B8A);
+  String type = "";
 
   @override
   Widget build(BuildContext context) {
@@ -103,14 +104,14 @@ class _Wallet2State extends State<Wallet2> {
                     border: Border.all(color: borderColor, width: 3),
                   ),
                   child: Center(child: Image.asset('assets/images/m2.png'))),
-                  onTap: (){
-                     setState(() {
+              onTap: () {
+                setState(() {
+                  type = "master";
                   borderColor = Color(
                       0xFF4B0B8A); // تحديث لون الحدود عند النقر على الصورة
                 });
-                  },
+              },
             ),
-            
             SizedBox(height: 10),
             GestureDetector(
               child: Container(
@@ -123,7 +124,10 @@ class _Wallet2State extends State<Wallet2> {
                 child: Center(child: Image.asset('assets/images/v2.png')),
               ),
               onTap: () {
+                  type = "visa";
                 setState(() {
+                  
+
                   borderColor = Color(
                       0xFF4B0B8A); // تحديث لون الحدود عند النقر على الصورة
                 });
@@ -144,9 +148,12 @@ class _Wallet2State extends State<Wallet2> {
                     ),
                     child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).popUntil(
-                              (route) => route.settings.name == Wallet3.id);
-                          Navigator.pushNamed(context, Wallet3.id);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => Wallet3(
+                                        type: type,
+                                      )));
                         },
                         child: Text(
                           'Next',
