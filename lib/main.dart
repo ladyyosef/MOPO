@@ -53,11 +53,11 @@ import 'package:flutter_application_2/ui/Screens/wallet1.dart';
 import 'package:flutter_application_2/ui/Screens/wallet2.dart';
 import 'package:flutter_application_2/ui/Screens/wallet3.dart';
 import 'package:flutter_application_2/ui/Screens/wallet4.dart';
-import 'package:flutter_application_2/ui/Screens/wallet5.dart';
-import 'package:flutter_application_2/ui/Screens/wallet6.dart';
-import 'package:flutter_application_2/ui/Screens/wallet7.dart';
-import 'package:flutter_application_2/ui/Screens/wallet8.dart';
-import 'package:flutter_application_2/ui/Screens/wallet9.dart';
+import 'package:flutter_application_2/ui/Screens/Wallet5.dart';
+import 'package:flutter_application_2/ui/Screens/Wallet6.dart';
+import 'package:flutter_application_2/ui/Screens/Wallet7.dart';
+import 'package:flutter_application_2/ui/Screens/Wallet8.dart';
+import 'package:flutter_application_2/ui/Screens/Wallet9.dart';
 import 'package:flutter_application_2/ui/widegets/Drawer.dart';
 import 'package:flutter_application_2/ui/widegets/Pages.dart';
 import 'package:flutter_application_2/ui/widegets/drop.dart';
@@ -108,7 +108,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute:Get_Start.id,
+      initialRoute: Get_Start.id,
       routes: {
         Get_Start.id: (context) => Get_Start(),
         Pages.id: (context) => Pages(),
@@ -135,7 +135,7 @@ class MyApp extends StatelessWidget {
         Profile1.id: (context) => Profile1(),
         Profile2.id: (context) => Profile2(),
         Profile3.id: (context) => Profile3(),
-     
+
         Profile8.id: (context) => Profile8(),
         Recevie.id: (context) => Recevie(),
         RecevieVar1.id: (context) => RecevieVar1(),
