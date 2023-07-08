@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/ui/Screens/Wallet6.dart';
+import 'package:flutter_application_2/ui/Screens/controllers/HomeController.dart';
 import 'package:flutter_application_2/ui/Screens/etherem.dart';
 import 'package:flutter_application_2/ui/Screens/lit.dart';
 import 'package:flutter_application_2/ui/Screens/market1.dart';
@@ -21,6 +22,7 @@ import '../widegets/h_appbar.dart';
 import '../widegets/home_appbar.dart';
 import 'help.dart';
 import 'language.dart';
+import 'model/classes.dart';
 import 'nav_pages/nav_bar.dart';
 
 class Home extends StatelessWidget {
@@ -314,157 +316,166 @@ class Home extends StatelessWidget {
             ]),
           ),
         ),
-        body: Stack(children: [
-          Container(
-              width: double.infinity,
-              child: Image.asset('assets/images/home.png')),
-          ListView(
-            children: [
-              // SizedBox(height: 10),
-              // HAppbar(),
-              Column(
+        body: FutureBuilder<List<CurrencyData>>(
+          future: HomeController.getcurrency(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final currency = snapshot.data!;
+            return Stack(children: [
+              Container(
+                  width: double.infinity,
+                  child: Image.asset('assets/images/home.png')),
+              ListView(
                 children: [
-                  SizedBox(
-                    height: 32,
-                  ),
-                  Container(
-                    width: 360,
-                    height: 180,
-                    decoration: BoxDecoration(
-                      //                             borderRadius: BorderRadius.circular(10),
-                      color: Color(0xFF4B0B8A),
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
+                  // SizedBox(height: 10),
+                  // HAppbar(),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 32,
+                      ),
+                      Container(
+                        width: 360,
+                        height: 180,
+                        decoration: BoxDecoration(
+                          //                             borderRadius: BorderRadius.circular(10),
+                          color: Color(0xFF4B0B8A),
+                        ),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+                              Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        top: 40, left: 10, right: 10, bottom: 10),
+                                    child: Text(
+                                      'The best way \n to trade \n digital currencies',
+                                      style: GoogleFonts.poppins(
+                                        color: Color.fromARGB(255, 255, 255, 255),
+                                        fontSize: 16,
+                                        //fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Image.asset('assets/images/HomeM.png')
+                                ],
+                              ),
                               Container(
-                                padding: EdgeInsets.only(
-                                    top: 40, left: 10, right: 10, bottom: 10),
-                                child: Text(
-                                  'The best way \n to trade \n digital currencies',
+                                  width: 190,
+                                  height: 190,
+                                  child: Image.asset('assets/images/HomeRopot.png'))
+                            ]),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                            top: 20, left: 8, right: 240, bottom: 10),
+                        child: Text(
+                          'Price Alrte',
+                          style: GoogleFonts.poppins(
+                            color: Color(0xFF4B0B8A),
+                            fontSize: 20,
+                            //fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        child: Container(
+                          width: 300,
+                          height: 150,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(22),
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              border: Border.all(
+                                color: Color(0xFFFAFF00),
+                                width: 1,
+                              )),
+                          child: Column(children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Image.asset('assets/images/HomeB.png'),
+                                Text(
+                                  'BTCUSDT just went \nabove 30123.232',
                                   style: GoogleFonts.poppins(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    fontSize: 16,
+                                    color: Color(0xFF4B0B8A),
+                                    fontSize: 15,
                                     //fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Image.asset('assets/images/HomeM.png')
-                            ],
+                                IconButton(
+                                  iconSize: 25,
+                                  icon: Icon(Icons.arrow_drop_down),
+                                  onPressed: () {
+                                    // ...
+                                  },
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Image.asset('assets/images/HomeLine.png'),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  'Buy',
+                                  style: GoogleFonts.poppins(
+                                    color: Color.fromARGB(255, 109, 107, 111),
+                                    fontSize: 15,
+                                    //fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Sell',
+                                  style: GoogleFonts.poppins(
+                                    color: Color.fromARGB(255, 109, 107, 111),
+                                    fontSize: 15,
+                                    //fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'More',
+                                  style: GoogleFonts.poppins(
+                                    color: Color(0xFF8567FF),
+                                    fontSize: 15,
+                                    //fontWeight: FontWeight.bold,/
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ]),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).popUntil(
+                              (route) => route.settings.name == Price_Alrte.id);
+                          Navigator.pushNamed(context, Price_Alrte.id);
+                        },
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                            top: 20, left: 8, right: 240, bottom: 10),
+                        child: Text(
+                          'Trending',
+                          style: GoogleFonts.poppins(
+                            color: Color(0xFF4B0B8A),
+                            fontSize: 20,
+                            //fontWeight: FontWeight.bold,
                           ),
-                          Container(
-                              width: 190,
-                              height: 190,
-                              child: Image.asset('assets/images/HomeRopot.png'))
-                        ]),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                        top: 20, left: 8, right: 240, bottom: 10),
-                    child: Text(
-                      'Price Alrte',
-                      style: GoogleFonts.poppins(
-                        color: Color(0xFF4B0B8A),
-                        fontSize: 20,
-                        //fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ),
-                  GestureDetector(
-                    child: Container(
-                      width: 300,
-                      height: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          border: Border.all(
-                            color: Color(0xFFFAFF00),
-                            width: 1,
-                          )),
-                      child: Column(children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Image.asset('assets/images/HomeB.png'),
-                            Text(
-                              'BTCUSDT just went \nabove 30123.232',
-                              style: GoogleFonts.poppins(
-                                color: Color(0xFF4B0B8A),
-                                fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            IconButton(
-                              iconSize: 25,
-                              icon: Icon(Icons.arrow_drop_down),
-                              onPressed: () {
-                                // ...
-                              },
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Image.asset('assets/images/HomeLine.png'),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'Buy',
-                              style: GoogleFonts.poppins(
-                                color: Color.fromARGB(255, 109, 107, 111),
-                                fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Sell',
-                              style: GoogleFonts.poppins(
-                                color: Color.fromARGB(255, 109, 107, 111),
-                                fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'More',
-                              style: GoogleFonts.poppins(
-                                color: Color(0xFF8567FF),
-                                fontSize: 15,
-                                //fontWeight: FontWeight.bold,/
-                              ),
-                            ),
-                          ],
-                        ),
-                      ]),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).popUntil(
-                          (route) => route.settings.name == Price_Alrte.id);
-                      Navigator.pushNamed(context, Price_Alrte.id);
-                    },
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                        top: 20, left: 8, right: 240, bottom: 10),
-                    child: Text(
-                      'Trending',
-                      style: GoogleFonts.poppins(
-                        color: Color(0xFF4B0B8A),
-                        fontSize: 20,
-                        //fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
+                    ...currency.map((curr) =>  GestureDetector(
                       child: Container(
                         width: 350,
                         height: 80,
@@ -482,7 +493,7 @@ class Home extends StatelessWidget {
               minRadius: 25,
               
               backgroundColor: Colors.white,
-              child: Icon(Icons.monetization_on,size: 25,color: Color(0xFF4B0B8A),),
+              backgroundImage: NetworkImage(curr.logo),
               
           
             ),
@@ -494,7 +505,7 @@ class Home extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text(
-                                    "LIT",
+                                    curr.abbreviation,
                                     style: GoogleFonts.lexendExa(
                                       color: Color.fromARGB(255, 0, 0, 0),
                                       fontSize: 14,
@@ -504,7 +515,7 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    "-1.3%",
+                                    "${curr.percentage}%",
                                     style: GoogleFonts.lexendExa(
                                       color: Color(0xFFB82727),
                                       fontSize: 12,
@@ -522,7 +533,7 @@ class Home extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text(
-                                    "22.558\$",
+                                    "${curr.newPrice}\$",
                                     style: GoogleFonts.lexendExa(
                                       color: Color.fromARGB(255, 0, 0, 0),
                                       fontSize: 14,
@@ -532,7 +543,7 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    "22.558\$",
+                                    "${curr.oldPrice}\$",
                                     style: GoogleFonts.lexendExa(
                                       color: Color(0xFF534C4C),
                                       fontSize: 12,
@@ -551,101 +562,104 @@ class Home extends StatelessWidget {
                          Navigator.push(
                       context, MaterialPageRoute(builder: (_) =>Lit()));
                       }),
-                  SizedBox(
-                    height: 10,
                   ),
-                  GestureDetector(
-                    child: Container(
-                      width: 350,
-                      height: 80,
-                      padding: EdgeInsets.only(
-                          top: 10, bottom: 5, right: 5, left: 10),
-                      decoration: BoxDecoration(
-                          color: Color(0xFFDDDBDB).withOpacity(0.4)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                        Container(
-            decoration: BoxDecoration(border: Border.all( color: Color(0xFFFAFF00),width: 2 ),borderRadius: BorderRadius.circular(30)),
-            child: CircleAvatar(
-              maxRadius: 25,
-              minRadius: 25,
-              
-              backgroundColor: Colors.white,
-              child: Icon(Icons.monetization_on,size: 25,color: Color(0xFF4B0B8A),),
-              
-          
-            ),
-            
-          ),
-                          Container(
-                            padding: EdgeInsets.only(
-                                top: 15, bottom: 8, right: 5, left: 10),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "USDT",
-                                  style: GoogleFonts.lexendExa(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-
-                                    //fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "+1.3%",
-                                  style: GoogleFonts.lexendExa(
-                                    color: Color.fromARGB(255, 39, 184, 46),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                    //fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(
-                                top: 15, bottom: 8, right: 5, left: 10),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "22.558\$",
-                                  style: GoogleFonts.lexendExa(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-
-                                    //fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "22.558\$",
-                                  style: GoogleFonts.lexendExa(
-                                    color: Color(0xFF534C4C),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-
-                                    //fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    onTap: () {
-                     Navigator.push(
-                      context, MaterialPageRoute(builder: (_) =>Usdt()));
-                    },
+                      GestureDetector(
+                        child: Container(
+                          width: 350,
+                          height: 80,
+                          padding: EdgeInsets.only(
+                              top: 10, bottom: 5, right: 5, left: 10),
+                          decoration: BoxDecoration(
+                              color: Color(0xFFDDDBDB).withOpacity(0.4)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                            Container(
+                decoration: BoxDecoration(border: Border.all( color: Color(0xFFFAFF00),width: 2 ),borderRadius: BorderRadius.circular(30)),
+                child: CircleAvatar(
+                  maxRadius: 25,
+                  minRadius: 25,
+                  
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.monetization_on,size: 25,color: Color(0xFF4B0B8A),),
+                  
+              
+                ),
+                
+              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: 15, bottom: 8, right: 5, left: 10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "USDT",
+                                      style: GoogleFonts.lexendExa(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+        
+                                        //fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "+1.3%",
+                                      style: GoogleFonts.lexendExa(
+                                        color: Color.fromARGB(255, 39, 184, 46),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        //fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: 15, bottom: 8, right: 5, left: 10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "22.558\$",
+                                      style: GoogleFonts.lexendExa(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+        
+                                        //fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "22.558\$",
+                                      style: GoogleFonts.lexendExa(
+                                        color: Color(0xFF534C4C),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+        
+                                        //fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                         Navigator.push(
+                          context, MaterialPageRoute(builder: (_) =>Usdt()));
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        ]),
+            ]);
+          }
+        ),
       ),
     );
   }

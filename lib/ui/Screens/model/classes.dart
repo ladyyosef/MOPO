@@ -107,3 +107,46 @@ class Trade {
     );
   }
 }
+class CurrencyData {
+  int id;
+  String logo;
+  String currencyName;
+  String abbreviation;
+  double newPrice;
+  double oldPrice;
+  double percentage;
+
+  CurrencyData({
+    required this.id,
+    required this.logo,
+    required this.currencyName,
+    required this.abbreviation,
+    required this.newPrice,
+    required this.oldPrice,
+    required this.percentage,
+  });
+
+  factory CurrencyData.fromJson(Map<String, dynamic> json) {
+    return CurrencyData(
+      id: json['id'],
+      logo: json['logo'],
+      currencyName: json['Currency_name'],
+      abbreviation: json['Abbrevation'],
+      newPrice: json['new_price'].toDouble(),
+      oldPrice: json['old_price'].toDouble(),
+      percentage: json['percentage'].toDouble(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'logo': logo,
+      'Currency_name': currencyName,
+      'Abbrevation': abbreviation,
+      'new_price': newPrice,
+      'old_price': oldPrice,
+      'percentage': percentage,
+    };
+  }
+}
