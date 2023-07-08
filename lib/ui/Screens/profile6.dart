@@ -24,30 +24,34 @@ class Profile6 extends StatelessWidget {
       required this.fullName,
       required this.phone,
       required this.password,
-      required this.birthDate, //required this.Nationality
+      required this.birthDate, 
+      required this.nationality
        })
       : super(key: key);
   var PostalCodeController = TextEditingController();
   var CityController = TextEditingController();
-  List<String> itemsList = ['syria', 'lebanon'];
-  String dropdownvalue = 'syria';
+
   static String id = "Profile6";
   final String email;
   final String password;
   final String fullName;
   final String phone;
   final String birthDate;
-  //final String Nationality;
+   final String nationality;
+     String place="";
   register(BuildContext context) async {
     final r = await ApiController.post(
       endpoint: "register",
       body: {
         "email": email,
         "password": password,
-        "user_name": fullName,
+        "Full_name": fullName,
         "phone": phone,
         "postal_code": PostalCodeController.text,
-        "City": CityController.text
+        "City": CityController.text,
+        "Nationality":nationality,
+        "Birth_date":birthDate,
+        "place_of_residence":place
       },
       onError: (statusCode, body) {},
     );
@@ -56,20 +60,7 @@ class Profile6 extends StatelessWidget {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', data['token']);
     Navigator.push(context, MaterialPageRoute(builder: (_) => Profile8()));
-    // var response = await curd.postReequest(LinkLogin,
-    //     {"email": emailController.text, "password": passwordController.text});
-    // if (response['status'] == "success") {
-    //   Navigator.of(context)
-    //       .popUntil((route) => route.settings.name == Profile8.id);
-    //   Navigator.pushNamed(context, Profile8.id);
-    //   // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Profile4()));
-    // } else {
-    //   AwesomeDialog(
-    //           context: context,
-    //           title: "warning",
-    //           body: Text("the password not corect"))
-    //       .show();
-    //   }
+  
   }
 
   bool validateFields() {
@@ -149,7 +140,7 @@ class Profile6 extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          MyWidget2(),
+          MyWidget2(onChanged: (value) => place=value,),
           SizedBox(
             height: 10,
           ),

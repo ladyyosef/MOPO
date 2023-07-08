@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyWidget2 extends StatefulWidget {
-  const MyWidget2({Key? key}) : super(key: key);
+  const MyWidget2({Key? key, required this.onChanged}) : super(key: key);
+
+  final Function(String value) onChanged;
 
   @override
   State<MyWidget2> createState() => _MyWidgetState();
@@ -124,8 +126,7 @@ class _MyWidgetState extends State<MyWidget2> {
           DropdownMenuItem(
             child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-              children: [
+                            children: [
                 Text(
                   "Qatar",
                   style: GoogleFonts.lexend(
@@ -145,6 +146,7 @@ class _MyWidgetState extends State<MyWidget2> {
           setState(() {
             selectedGender = val;
           });
+          widget.onChanged(selectedGender!);
         },
         value: selectedGender, // Set the default value for DropdownButton
       ),

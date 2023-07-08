@@ -16,31 +16,32 @@ import 'home.dart';
 import 'link_api.dart';
 
 class Profile5 extends StatelessWidget {
-  Profile5({Key? key,required this.email,required this.password}) : super(key: key);
-   RegisterController _crud = RegisterController();
+  Profile5({Key? key, required this.email, required this.password})
+      : super(key: key);
+  RegisterController _crud = RegisterController();
   final _formKey = GlobalKey<FormState>();
 
   var fullNameController = TextEditingController();
   var phoneController = TextEditingController();
-    var BirthDateController = TextEditingController();
+  var BirthDateController = TextEditingController();
 
-      static String id = "Profile5";
-      final String email;
-    final String password;
+  static String id = "Profile5";
+  final String email;
+  final String password;
+  String nationality = "";
 
-       SingUp(BuildContext context) async {
+  SingUp(BuildContext context) async {
     var response = await _crud.postReequest(LinkRegister, {
       "userName": fullNameController.text,
-      
     });
     if (response['status'] == "success") {
- Navigator.of(context).popUntil(
-                        (route) => route.settings.name == Profile6.id);
-                    Navigator.pushNamed(context, Profile6.id);    } else {
-                      
-                    }
+      Navigator.of(context)
+          .popUntil((route) => route.settings.name == Profile6.id);
+      Navigator.pushNamed(context, Profile6.id);
+    } else {}
   }
-void _submitForm() {
+
+  void _submitForm() {
     if (_formKey.currentState!.validate()) {
       // All form fields are valid, submit data
       // You can access the values of the form fields using
@@ -50,6 +51,7 @@ void _submitForm() {
       // Navigator.pushNamed(context, Profile6.id);
     }
   }
+
   bool validateFields() {
     if (fullNameController.text.isEmpty) {
       // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
@@ -65,79 +67,71 @@ void _submitForm() {
     return true;
   }
 
-  
-
-
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
         child: Column(children: [
-          Container(
-                    width: 425,
-                    height: 55,
-                    color: Colors.white,
-                    child: Row(
-                      children: [
-                               IconButton(onPressed: (){
-                                 Navigator.push(context, MaterialPageRoute(builder: (_) => Profile3()));
- 
-                               }, icon:Icon(Icons.arrow_back)),
-
-
-                           
-                        SizedBox(
-                          width: 180.0,
-                        ),
-                        Center(
-                          child: Container(
-                          width: 120,
-                          height: 100,
-                            child: Image.asset('assets/images/LogoHome.png')),
-                        )
-                      ],
-                    ),
-                  ),
+      Container(
+        width: 425,
+        height: 55,
+        color: Colors.white,
+        child: Row(
+          children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Profile3()));
+                },
+                icon: Icon(Icons.arrow_back)),
+            SizedBox(
+              width: 180.0,
+            ),
+            Center(
+              child: Container(
+                  width: 120,
+                  height: 100,
+                  child: Image.asset('assets/images/LogoHome.png')),
+            )
+          ],
+        ),
+      ),
       Column(
         children: [
-
-     
           SizedBox(
             height: 10,
           ),
-        Container(  padding: EdgeInsets.only(top:10,bottom:10,right: 10,left:10),
- color: Color.fromARGB(255, 252, 249, 255),             
-  width: double.infinity,
-                 height: 60,
-
-           child: Text(
+          Container(
+            padding: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
+            color: Color.fromARGB(255, 252, 249, 255),
+            width: double.infinity,
+            height: 60,
+            child: Text(
               "Personal Information",
               style: GoogleFonts.leckerliOne(
-                color:  Color(0xFF4B0B8A),
+                color: Color(0xFF4B0B8A),
                 fontSize: 22,
-                
+
                 //fontWeight: FontWeight.bold,
               ),
-            
             ),
-         ),
-          
+          ),
           SizedBox(
             height: 25,
           ),
-           Container(
+          Container(
             padding: EdgeInsets.only(top: 1, bottom: 20, right: 240, left: 10),
             child: Text(
-              'Nationality',
+              'Place of residence',
               style: TextStyle(
                   fontSize: 20,
                   color: Color(0xFF4B0B8A),
-                  fontWeight: FontWeight.bold
-                  ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
-            MyWidget2(),
-         
-             SizedBox(
+          MyWidget2(
+            onChanged: (value) => nationality = value,
+          ),
+          SizedBox(
             height: 10,
           ),
           Container(
@@ -147,8 +141,7 @@ void _submitForm() {
               style: TextStyle(
                   fontSize: 20,
                   color: Color(0xFF4B0B8A),
-                  fontWeight: FontWeight.bold
-                  ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(
@@ -187,8 +180,7 @@ void _submitForm() {
               style: TextStyle(
                   fontSize: 20,
                   color: Color(0xFF4B0B8A),
-                  fontWeight: FontWeight.bold
-                ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(
@@ -216,18 +208,17 @@ void _submitForm() {
               ),
             ),
           ),
-             SizedBox(
+          SizedBox(
             height: 10,
           ),
-                    Container(
+          Container(
             padding: EdgeInsets.only(top: 1, bottom: 10, right: 230, left: 10),
             child: Text(
               'Birth Date',
               style: TextStyle(
                   fontSize: 20,
                   color: Color(0xFF4B0B8A),
-                  fontWeight: FontWeight.bold
-                ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(
@@ -238,7 +229,7 @@ void _submitForm() {
             height: 60,
             child: TextFormField(
               controller: BirthDateController,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.datetime,
               obscureText: false,
               onFieldSubmitted: (String value) {
                 print(value);
@@ -251,7 +242,7 @@ void _submitForm() {
                   borderRadius: BorderRadius.circular(19),
                 ),
                 // labelText: 'password',
-                suffix: Icon(Icons.show_chart_outlined),
+               //aa suffix: Icon(Icons.show_chart_outlined),
               ),
             ),
           ),
@@ -259,23 +250,29 @@ void _submitForm() {
             height: 40,
           ),
           Container(
-           width: 280,
-                height: 55,
-                decoration: BoxDecoration(borderRadius:BorderRadius.circular(18),
-                                color: Color(0xFF4B0B8A),
- ),
+            width: 280,
+            height: 55,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              color: Color(0xFF4B0B8A),
+            ),
             child: MaterialButton(
               onPressed: () {
                 print(fullNameController.text);
                 print(phoneController.text);
                 if (validateFields()) {
-                         Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Profile6(email: email,password: password,phone: phoneController.text,fullName:fullNameController.text ,birthDate:BirthDateController.text,//Nationality:selectedGender
-                      )));
-
-                    }
-              
-             
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => Profile6(
+                                email: email,
+                                password: password,
+                                phone: phoneController.text,
+                                fullName: fullNameController.text,
+                                birthDate: BirthDateController.text,
+                                nationality:nationality ,
+                              )));
+                }
               },
               child: Text(
                 'next',

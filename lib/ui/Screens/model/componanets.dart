@@ -245,7 +245,7 @@ final String email;
               ),
             ),
             onTap: () async {
-              await logoutController;
+               logoutController(context);
             },
           ),
           Image.asset('assets/images/line8.png'),
