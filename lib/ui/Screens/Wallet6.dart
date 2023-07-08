@@ -29,8 +29,11 @@ import '../widegets/Pages.dart';
 import '../widegets/wallet_appbar.dart';
 import 'Wallet7.dart';
 import 'Wallet8.dart';
+import 'controllers/Market3Controller.dart';
+import 'controllers/WalletController.dart';
 import 'help.dart';
 import 'language.dart';
+import 'model/classes.dart';
 //mport 'package:flutter_application_2/ui/widegets/wallet_abbpar.dart';
 
 class Wallet6 extends StatefulWidget {
@@ -264,677 +267,689 @@ Navigator.pushNamed(context, Help.id);     },
             body:Stack(
           children: [
             Image.asset('assets/images/W6.png'),
-             ListView(
-              children: [
-                Column(
+             FutureBuilder<List<Item>>(
+               future: WalletController.getcurrency(),
+               builder: (context, snapshot) {
+                   if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final currency = snapshot.data!;
+                 return ListView(
                   children: [
-                                Container(
-                   padding: EdgeInsets.only(top:50,bottom:20,right: 0,left:10),
-                    child: Text(
-                      "My Wallet",
-                      style: GoogleFonts.lexend(
-           
-                          color:  Color(0xFF4B0B8A),
-                        fontSize: 22,
-                       fontWeight: FontWeight.bold,
-                       
-                      ),
-                    
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                             width: 65,
-                          height: 50,
-                              decoration: BoxDecoration(
-                             
-                                color:  Color(0xFF4B0B8A),
-                                
-                                
-                              
-                              borderRadius: BorderRadius.circular(15),
-                                ),
-                            child: IconButton(
-                            //iconSize: 72,
-                            color: Colors.white,
-                            icon: Image.asset('assets/images/send.png',),
-                            onPressed: () {
-                                Navigator.of(context).popUntil((route) => route.settings.name ==Send.id);
-Navigator.pushNamed(context, Send.id); 
-                            },
-                          ),
-                          ),
-                           Text(
-                          "Send",
-                          style: GoogleFonts.lexend(
-           
-                              color:  Colors.black,
-                            fontSize: 16,
-                           fontWeight: FontWeight.bold,
-                           
-                          ),
-                        
-                        ),
-          
-                        ],
-                      ),
-                                     Column(
-                        children: [
-                          Container(
-                               width: 65,
-                          height: 50,
-                              decoration: BoxDecoration(
-                             
-                                color:  Color(0xFF4B0B8A),
-                                
-                                
-                              
-                              borderRadius: BorderRadius.circular(15),
-                                ),
-                            child: IconButton(
-                            //iconSize: 72,
-                            color: Colors.white,
-                            icon:  Image.asset('assets/images/rec.png',),
-                            onPressed: () {
-                               Navigator.of(context).popUntil((route) => route.settings.name ==Recevie.id);
-Navigator.pushNamed(context, Recevie.id); 
-                            },
-                          ),
-                          ),
-                           Text(
-                          "Receive",
-                          style: GoogleFonts.lexend(
-           
-                              color:  Colors.black,
-                            fontSize: 16,
-                           fontWeight: FontWeight.bold,
-                           
-                          ),
-                        
-                        ),
-          
-                        ],
-                      ),
-                                     Column(
-                        children: [
-                          Container(
-                               width: 65,
-                          height: 50,
-                              decoration: BoxDecoration(
-                             
-                                color:  Color(0xFF4B0B8A),
-                                
-                                
-                              
-                              borderRadius: BorderRadius.circular(15),
-                                ),
-                            child: IconButton(
-                            //iconSize: 72,
-                            color: Colors.white,
-                            icon:  Image.asset('assets/images/buy.png',),
-                            onPressed: () {
-                                Navigator.of(context).popUntil((route) => route.settings.name ==NBuy.id);
-Navigator.pushNamed(context, NBuy.id); 
-                            
-                            },
-                          ),
-                          ),
-                           Text(
-                          "Buy",
-                          style: GoogleFonts.lexend(       
-                              color:  Colors.black,
-                            fontSize: 16,
-                           fontWeight: FontWeight.bold,
-                           
-                          ),
-                        
-                        ),
-          
-                        ],
-                      ),
-                                     Column(
-                        children: [
-                          Container(
-                               width: 65,
-                          height: 50,
-                              decoration: BoxDecoration(
-                             
-                                color:  Color(0xFF4B0B8A),
-                                
-                                
-                              
-                              borderRadius: BorderRadius.circular(15),
-                                ),
-                            child: IconButton(
-                            //iconSize: 72,
-                            color: Colors.white,
-                            icon:  Image.asset('assets/images/trade.png',),
-                            onPressed: () {
-                                Navigator.of(context).popUntil((route) => route.settings.name ==Trade1.id);
-Navigator.pushNamed(context, Trade1.id); 
-                            
-                            },
-                          ),
-                          ),
-                           Text(
-                          "Trade",
-                          style: GoogleFonts.lexend(
-           
-                              color:  Colors.black,
-                            fontSize: 16,
-                           fontWeight: FontWeight.bold,
-                           
-                          ),
-                        
-                        ),
-          
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15,),
-                
-                  Container(
-                       color:  Color(0xFFD9D9D9),
-                       height: 60,
-          
-                    child: Row(
-                      mainAxisAlignment:MainAxisAlignment.spaceAround ,
+                    Column(
                       children: [
-                        Container(
-                          width: 180,
-                          height: 45,
-                              //padding: EdgeInsets.only(top:5,bottom:5,right: 1,left: 10),
-                                  decoration: BoxDecoration(
+                                    Container(
+                       padding: EdgeInsets.only(top:50,bottom:20,right: 0,left:10),
+                        child: Text(
+                          "My Wallet",
+                          style: GoogleFonts.lexend(
+                        
+                              color:  Color(0xFF4B0B8A),
+                            fontSize: 22,
+                           fontWeight: FontWeight.bold,
                            
-                              color:  Color(0xFFFFFFFF),
-                              
-                              border: Border(
-                                 bottom: BorderSide( //                    <--- top side
-                                      color:  Color(0xFF4B0B8A),
-                  
-                          width: 3.0,
+                          ),
+                        
                         ),
                       ),
-                   ),
-                            
-                            //borderRadius: BorderRadius.circular(15),
-                              
-                              child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Coins',
-                                style: GoogleFonts.inter(
+                      SizedBox(height: 20,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                 width: 65,
+                              height: 50,
+                                  decoration: BoxDecoration(
+                                 
                                     color:  Color(0xFF4B0B8A),
-                  
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )),),
-                                Container(
-                          width: 180,
-                          height: 45,
-                              //padding: EdgeInsets.only(top:5,bottom:5,right: 1,left: 10),
+                                    
+                                    
+                                  
+                                  borderRadius: BorderRadius.circular(15),
+                                    ),
+                                child: IconButton(
+                                //iconSize: 72,
+                                color: Colors.white,
+                                icon: Image.asset('assets/images/send.png',),
+                                onPressed: () {
+                                    Navigator.of(context).popUntil((route) => route.settings.name ==Send.id);
+             Navigator.pushNamed(context, Send.id); 
+                                },
+                              ),
+                              ),
+                               Text(
+                              "Send",
+                              style: GoogleFonts.lexend(
+                        
+                                  color:  Colors.black,
+                                fontSize: 16,
+                               fontWeight: FontWeight.bold,
+                               
+                              ),
+                            
+                            ),
+                       
+                            ],
+                          ),
+                                         Column(
+                            children: [
+                              Container(
+                                   width: 65,
+                              height: 50,
                                   decoration: BoxDecoration(
-                           
-                              color:  Color(0xFFFFFFFF),
-                              
-                              border: Border(
-                                 bottom: BorderSide( //                    <--- top side
-                                      color:  Color(0xFF6C696F),
-                  
-                          width: 3.0,
+                                 
+                                    color:  Color(0xFF4B0B8A),
+                                    
+                                    
+                                  
+                                  borderRadius: BorderRadius.circular(15),
+                                    ),
+                                child: IconButton(
+                                //iconSize: 72,
+                                color: Colors.white,
+                                icon:  Image.asset('assets/images/rec.png',),
+                                onPressed: () {
+                                   Navigator.of(context).popUntil((route) => route.settings.name ==Recevie.id);
+             Navigator.pushNamed(context, Recevie.id); 
+                                },
+                              ),
+                              ),
+                               Text(
+                              "Receive",
+                              style: GoogleFonts.lexend(
+                        
+                                  color:  Colors.black,
+                                fontSize: 16,
+                               fontWeight: FontWeight.bold,
+                               
+                              ),
+                            
+                            ),
+                       
+                            ],
+                          ),
+                                         Column(
+                            children: [
+                              Container(
+                                   width: 65,
+                              height: 50,
+                                  decoration: BoxDecoration(
+                                 
+                                    color:  Color(0xFF4B0B8A),
+                                    
+                                    
+                                  
+                                  borderRadius: BorderRadius.circular(15),
+                                    ),
+                                child: IconButton(
+                                //iconSize: 72,
+                                color: Colors.white,
+                                icon:  Image.asset('assets/images/buy.png',),
+                                onPressed: () {
+                                    Navigator.of(context).popUntil((route) => route.settings.name ==NBuy.id);
+             Navigator.pushNamed(context, NBuy.id); 
+                                
+                                },
+                              ),
+                              ),
+                               Text(
+                              "Buy",
+                              style: GoogleFonts.lexend(       
+                                  color:  Colors.black,
+                                fontSize: 16,
+                               fontWeight: FontWeight.bold,
+                               
+                              ),
+                            
+                            ),
+                       
+                            ],
+                          ),
+                                         Column(
+                            children: [
+                              Container(
+                                   width: 65,
+                              height: 50,
+                                  decoration: BoxDecoration(
+                                 
+                                    color:  Color(0xFF4B0B8A),
+                                    
+                                    
+                                  
+                                  borderRadius: BorderRadius.circular(15),
+                                    ),
+                                child: IconButton(
+                                //iconSize: 72,
+                                color: Colors.white,
+                                icon:  Image.asset('assets/images/trade.png',),
+                                onPressed: () {
+                                    Navigator.of(context).popUntil((route) => route.settings.name ==Trade1.id);
+             Navigator.pushNamed(context, Trade1.id); 
+                                
+                                },
+                              ),
+                              ),
+                               Text(
+                              "Trade",
+                              style: GoogleFonts.lexend(
+                        
+                                  color:  Colors.black,
+                                fontSize: 16,
+                               fontWeight: FontWeight.bold,
+                               
+                              ),
+                            
+                            ),
+                       
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15,),
+                    
+                      Container(
+                           color:  Color(0xFFD9D9D9),
+                           height: 60,
+                       
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround ,
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 45,
+                                  //padding: EdgeInsets.only(top:5,bottom:5,right: 1,left: 10),
+                                      decoration: BoxDecoration(
+                               
+                                  color:  Color(0xFFFFFFFF),
+                                  
+                                  border: Border(
+                                     bottom: BorderSide( //                    <--- top side
+                                          color:  Color(0xFF4B0B8A),
+                      
+                              width: 3.0,
+                            ),
+                          ),
+                       ),
+                                
+                                //borderRadius: BorderRadius.circular(15),
+                                  
+                                  child: TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'Coins',
+                                    style: GoogleFonts.inter(
+                                        color:  Color(0xFF4B0B8A),
+                      
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),),
+                                    Container(
+                              width: 180,
+                              height: 45,
+                                  //padding: EdgeInsets.only(top:5,bottom:5,right: 1,left: 10),
+                                      decoration: BoxDecoration(
+                               
+                                  color:  Color(0xFFFFFFFF),
+                                  
+                                  border: Border(
+                                     bottom: BorderSide( //                    <--- top side
+                                          color:  Color(0xFF6C696F),
+                      
+                              width: 3.0,
+                            ),
+                          ),
+                       ),
+                                
+                                //borderRadius: BorderRadius.circular(15),
+                                  
+                                  child: TextButton(
+                                  onPressed: () {
+                                                   Navigator.of(context).popUntil((route) => route.settings.name ==Wallet7.id);
+             Navigator.pushNamed(context, Wallet7.id); 
+                                  },
+                                  child: Text(
+                                    'Card',
+                                    style: GoogleFonts.inter(
+                                        color:  Color(0xFF6C696F),
+                      
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),),
+                          ],
                         ),
                       ),
-                   ),
-                            
-                            //borderRadius: BorderRadius.circular(15),
+                       Column(
+                         children: [
+                            ...currency.map((curr) => GestureDetector(
+                             child: Container(
+                                       width: 350,
+                                       height: 80,
+                             padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
+                                       decoration: BoxDecoration(
+                               color:Color(0xFFDDDBDB).withOpacity(0.4)
+                                       ),
+                                       child: Row(
+                              mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                              children: [
+                              Image.asset("name"),
+                              Container(
+                                 padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                                                 curr.abbreviation,
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                                                               Text(
+                                                                 "${curr.percentage}%",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFF34A853),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
                               
-                              child: TextButton(
-                              onPressed: () {
-                                               Navigator.of(context).popUntil((route) => route.settings.name ==Wallet7.id);
-Navigator.pushNamed(context, Wallet7.id); 
-                              },
-                              child: Text(
-                                'Cart',
-                                style: GoogleFonts.inter(
-                                    color:  Color(0xFF6C696F),
-                  
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                                  ],
                                 ),
-                              )),),
-                      ],
-                    ),
-                  ),
-                   Column(
-                     children: [
-                       GestureDetector(
-                         child: Container(
-                                   width: 350,
-                                   height: 80,
-                         padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
-                                   decoration: BoxDecoration(
-                           color:Color(0xFFDDDBDB).withOpacity(0.4)
-                                   ),
-                                   child: Row(
-                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                          children: [
-                          Image.asset("assets/images/EthMarket.png"),
-                          Container(
-                             padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                            child: Column(
-                              children: [
-                                Text(
-                                                             "ETH",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "+1.3%",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFF34A853),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                          
-                              ],
-                            ),
-                          ),
-                       
-                           Container( 
-                                   padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                             child: Column(
-                              children: [
-                                Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFF534C4C),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
+                              ),
                            
-                              ],
-                                         ),
-                           ),
-                       
-                                   ],
-                                 ),
-                                            ),
-                                            onTap: (){
-                                                             Navigator.of(context).popUntil((route) => route.settings.name ==Etherem.id);
-Navigator.pushNamed(context, Etherem.id); ;
-                                            },
-                       ),
-          
-                       GestureDetector(
-                         child: Container(
-                                   width: 350,
-                                   height: 80,
-                         padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
-                                   decoration: BoxDecoration(
-                           color:Color(0xFFDDDBDB).withOpacity(0.4)
-                                   ),
-                                   child: Row(
-                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                          children: [
-                          Image.asset("assets/images/NeoMarket.png"),
-                          Container(
-                             padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                            child: Column(
-                              children: [
-                                Text(
-                                                             "NEO",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
+                               Container( 
+                                       padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                 child: Column(
+                                  children: [
+                                    Text(
+                                                                 "${curr.quantity}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
                                                                
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "+1.3%",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFF34A853),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
+                                                               ),
+                                                               Text(
+                                                                 "${curr.price}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFF534C4C),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
                                                                
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                          
-                              ],
-                            ),
-                          ),
-                       
-                           Container( 
-                                   padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                             child: Column(
-                              children: [
-                                Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFF534C4C),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                           
-                              ],
-                                         ),
-                           ),
-                       
-                                   ],
-                                 ),
+                                                               ),
                                
-                         ),
-                         onTap: (){ Navigator.of(context).popUntil((route) => route.settings.name ==Neo.id);
-Navigator.pushNamed(context, Neo.id); 
-                         },
-                       ),
-                       
-                       GestureDetector(
-                         child: Container(
-                                   width: 350,
-                                   height: 80,
-                         padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
-                                   decoration: BoxDecoration(
-                           color:Color(0xFFDDDBDB).withOpacity(0.4)
-                                   ),
-                                   child: Row(
-                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                          children: [
-                          Image.asset("assets/images/UsdtMarket.png"),
-                          Container(
-                             padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                            child: Column(
-                              children: [
-                                Text(
-                                                             "USDT",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "-1.3%",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFFB82727),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                          
-                              ],
-                            ),
-                          ),
-                       
-                           Container( 
-                                   padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                             child: Column(
-                              children: [
-                                Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFF534C4C),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
+                                  ],
+                                             ),
+                               ),
                            
-                              ],
-                                         ),
-                           ),
+                                       ],
+                                     ),
+                                                ),
+                                                onTap: (){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (_)=>Etherem()));
+ 
+                                                },
+                           ),),
                        
-                                   ],
-                                 ),),
-                                 onTap: (){
-                                                   Navigator.of(context).popUntil((route) => route.settings.name ==Usdt.id);
-Navigator.pushNamed(context, Usdt.id); 
-                                 },
-                       ),
-                       
-                       GestureDetector(
-                         child: Container(
-                                   width: 350,
-                                   height: 80,
-                         padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
-                                   decoration: BoxDecoration(
-                           color:Color(0xFFDDDBDB).withOpacity(0.4)
-                                   ),
-                                   child: Row(
-                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                          children: [
-                          Image.asset("assets/images/BitcoinMarket.png"),
-                          Container(
-                             padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                            child: Column(
+                       ...currency.map((curr) =>      GestureDetector(
+                             child: Container(
+                                       width: 350,
+                                       height: 80,
+                             padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
+                                       decoration: BoxDecoration(
+                               color:Color(0xFFDDDBDB).withOpacity(0.4)
+                                       ),
+                                       child: Row(
+                              mainAxisAlignment:MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                                             "BTC",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
+                              Image.network(""),
+                              Container(
+                                 padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                                                 curr.abbreviation,
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
                                                                
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "+1.3%",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFF1B934F),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
+                                                               ),
+                                                               Text(
+                                                                 "${curr.percentage}%",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFF34A853),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
                                                                
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                          
-                              ],
-                            ),
-                          ),
-                       
-                           Container( 
-                                   padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                             child: Column(
-                              children: [
-                                Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFF534C4C),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
+                                                               ),
+                              
+                                  ],
+                                ),
+                              ),
                            
-                              ],
-                                         ),
-                           ),
-                       
-                                   ],
-                                 ),),
-                                 onTap: (){
-                                               Navigator.of(context).popUntil((route) => route.settings.name ==Bitcoin.id);
-Navigator.pushNamed(context, Bitcoin.id); 
-                                 },
-                       ),
-                       
-                       GestureDetector(
-                         child: Container(
-                                   width: 350,
-                                   height: 80,
-                         padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
-                                   decoration: BoxDecoration(
-                           color:Color(0xFFDDDBDB).withOpacity(0.4)
-                                   ),
-                                   child: Row(
-                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                          children: [
-                          Image.asset("assets/images/LitMarket.png"),
-                          Container(
-                             padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                            child: Column(
-                              children: [
-                                Text(
-                                                             "LIT",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
+                               Container( 
+                                       padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                 child: Column(
+                                  children: [
+                                    Text(
+                                                                 "${curr.quantity}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
                                                                
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "-1.3%",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFFB82727),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
+                                                               ),
+                                                               Text(
+                                                                 "${curr.price}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFF534C4C),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
                                                                
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                          
-                              ],
-                            ),
-                          ),
-                       
-                           Container( 
-                                   padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
-                             child: Column(
-                              children: [
-                                Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color.fromARGB(255, 0, 0, 0),
-                                                               fontSize: 14,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
-                                                           Text(
-                                                             "22.558\$",
-                                                             style: GoogleFonts.lexendExa(
-                                         color: Color(0xFF534C4C),
-                                                               fontSize: 12,
-                                                               fontWeight: FontWeight.bold,
-                                                               
-                                                               //fontWeight: FontWeight.bold,
-                                                             ),
-                                                           
-                                                           ),
+                                                               ),
+                               
+                                  ],
+                                             ),
+                               ),
                            
-                              ],
-                                         ),
+                                       ],
+                                     ),
+                                   
+                             ),
+                             onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (_)=>Neo()));
+  
+                             },
                            ),
-                       
-                                   ],
-                                 ),),
-                                 onTap: (){
-                                               Navigator.of(context).popUntil((route) => route.settings.name ==Lit.id);
-Navigator.pushNamed(context, Lit.id); 
-                                 },
                        ),
-                       
+                           
+                           ...currency.map((curr) =>  GestureDetector(
+                             child: Container(
+                                       width: 350,
+                                       height: 80,
+                             padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
+                                       decoration: BoxDecoration(
+                               color:Color(0xFFDDDBDB).withOpacity(0.4)
+                                       ),
+                                       child: Row(
+                              mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                              children: [
+                              Image.network(""),
+                              Container(
+                                 padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                                                 curr.abbreviation,
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                                                               Text(
+                                                                 "${curr.percentage}%",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFFB82727),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                              
+                                  ],
+                                ),
+                              ),
+                           
+                               Container( 
+                                       padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                 child: Column(
+                                  children: [
+                                    Text(
+                                                                 "${curr.quantity}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                                                               Text(
+                                                                 "${curr.price}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFF534C4C),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                               
+                                  ],
+                                             ),
+                               ),
+                           
+                                       ],
+                                     ),),
+                                     onTap: (){
+                                                      Navigator.push(context, MaterialPageRoute(builder: (_)=>Usdt()));
+ 
+                                     },
+                           ),),
+                           
+                           ...currency.map((curr) =>  GestureDetector(
+                             child: Container(
+                                       width: 350,
+                                       height: 80,
+                             padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
+                                       decoration: BoxDecoration(
+                               color:Color(0xFFDDDBDB).withOpacity(0.4)
+                                       ),
+                                       child: Row(
+                              mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                              children: [
+                              Image.asset("assets/images/BitcoinMarket.png"),
+                              Container(
+                                 padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                                               curr.abbreviation,
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                                                               Text(
+                                                                 "${curr.percentage}%",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFF1B934F),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                              
+                                  ],
+                                ),
+                              ),
+                           
+                               Container( 
+                                       padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                 child: Column(
+                                  children: [
+                                    Text(
+                                                                 "${curr.quantity}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                                                               Text(
+                                                                 "${curr.price}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFF534C4C),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                               
+                                  ],
+                                             ),
+                               ),
+                           
+                                       ],
+                                     ),),
+                                     onTap: (){
+                                                   Navigator.push(context, MaterialPageRoute(builder: (_)=>Bitcoin()));
+ 
+                                     },
+                           ),),
+                           
+                    ...currency.map((curr) =>         GestureDetector(
+                             child: Container(
+                                       width: 350,
+                                       height: 80,
+                             padding: EdgeInsets.only(top:10,bottom:5,right: 5,left: 10),
+                                       decoration: BoxDecoration(
+                               color:Color(0xFFDDDBDB).withOpacity(0.4)
+                                       ),
+                                       child: Row(
+                              mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                              children: [
+                              Image.asset("assets/images/LitMarket.png"),
+                              Container(
+                                 padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                                                 curr.abbreviation,
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                                                               Text(
+                                                                 "${curr.percentage}%",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFFB82727),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                              
+                                  ],
+                                ),
+                              ),
+                           
+                               Container( 
+                                       padding: EdgeInsets.only(top:15,bottom:8,right: 5,left: 10),
+                                 child: Column(
+                                  children: [
+                                    Text(
+                                                                 "${curr.quantity}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color.fromARGB(255, 0, 0, 0),
+                                                                   fontSize: 14,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                                                               Text(
+                                                                 "${curr.price}\$",
+                                                                 style: GoogleFonts.lexendExa(
+                                             color: Color(0xFF534C4C),
+                                                                   fontSize: 12,
+                                                                   fontWeight: FontWeight.bold,
+                                                                   
+                                                                   //fontWeight: FontWeight.bold,
+                                                                 ),
+                                                               
+                                                               ),
+                               
+                                  ],
+                                             ),
+                               ),
+                           
+                                       ],
+                                     ),),
+                                     onTap: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (_)=>Lit()));
+ 
+                                     },
+                           ),)
+                           
+                          
                       
-                  
-                       
-                
-                       
-                     ],
-                   )]),
-              ],
-            ),
+                           
+                    
+                           
+                         ],
+                       )]),
+                  ],
+                         );
+               }
+             ),
             ] ) 
           )
            

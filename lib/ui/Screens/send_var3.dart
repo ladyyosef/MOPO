@@ -49,8 +49,8 @@ class SendVar3 extends StatelessWidget {
             children: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).popUntil((route) => route.settings.name == SendVar2.id);
-                   Navigator.pushNamed(context, SendVar2.id);  
+                     Navigator.push(context, MaterialPageRoute(builder: (_)=>SendVar2()));
+
                   },
                   icon: Icon(Icons.arrow_back)),
               SizedBox(

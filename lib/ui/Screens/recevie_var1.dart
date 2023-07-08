@@ -46,8 +46,8 @@ class RecevieVar1 extends StatelessWidget {
             children: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).popUntil((route) => route.settings.name == Recevie.id);
-Navigator.pushNamed(context, Recevie.id);  
+                                          Navigator.push(context, MaterialPageRoute(builder: (_) => Recevie()));
+  
                   },
                   icon: Icon(Icons.arrow_back)),
               SizedBox(
@@ -155,8 +155,8 @@ Navigator.pushNamed(context, Recevie.id);
 
                       print(VerificationController.text);
                   
-                                     Navigator.of(context).popUntil((route) => route.settings.name == RecevieVar2.id);
-Navigator.pushNamed(context, RecevieVar2.id);  
+                                                           Navigator.push(context, MaterialPageRoute(builder: (_) => RecevieVar2()));
+
                   
                   },
                   child: Text(

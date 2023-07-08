@@ -300,8 +300,8 @@ class Market3 extends StatelessWidget {
                               child: TextButton(
                                   onPressed: () {
                                     
-                                   Navigator.of(context).popUntil((route) => route.settings.name == Etherem.id);
-                 Navigator.pushNamed(context, Etherem.id);  
+                                 Navigator.push(context, MaterialPageRoute(builder: (_)=>Etherem()));
+ 
                           
                                   },
                                   child: Text(
@@ -320,8 +320,8 @@ class Market3 extends StatelessWidget {
                       ]),
                     ),
                       onTap: (){
-                            Navigator.of(context).popUntil((route) => route.settings.name == Etherem.id);
-                 Navigator.pushNamed(context, Etherem.id);  
+                           Navigator.push(context, MaterialPageRoute(builder: (_)=>Etherem()));
+ 
                           
                           },
                   ),),
@@ -408,8 +408,8 @@ class Market3 extends StatelessWidget {
                               ),
                               child: TextButton(
                                   onPressed: () {
-                             Navigator.of(context).popUntil((route) => route.settings.name == Usdt.id);
-                 Navigator.pushNamed(context, Usdt.id);  
+                             Navigator.push(context, MaterialPageRoute(builder: (_)=>Usdt()));
+  
                           
                           
                                   },
@@ -429,8 +429,8 @@ class Market3 extends StatelessWidget {
                       ]),
                     ),
                       onTap: (){
-                             Navigator.of(context).popUntil((route) => route.settings.name == Usdt.id);
-                 Navigator.pushNamed(context, Usdt.id);  
+                             Navigator.push(context, MaterialPageRoute(builder: (_)=>Usdt()));
+  
                           
                           },
                   ),),
@@ -518,8 +518,8 @@ class Market3 extends StatelessWidget {
                               child: TextButton(
                                   onPressed: () {
                                      
-                            Navigator.of(context).popUntil((route) => route.settings.name == Bitcoin.id);
-                 Navigator.pushNamed(context, Bitcoin.id);  
+                           Navigator.push(context, MaterialPageRoute(builder: (_)=>Bitcoin()));
+ 
                           
                           
                                   },
@@ -539,8 +539,8 @@ class Market3 extends StatelessWidget {
                       ]),
                     ),
                       onTap: (){
-                             Navigator.of(context).popUntil((route) => route.settings.name == Bitcoin.id);
-                 Navigator.pushNamed(context, Bitcoin.id);  
+                             Navigator.push(context, MaterialPageRoute(builder: (_)=>Bitcoin()));
+ 
                           },
                   ),),
                    SizedBox(
@@ -626,8 +626,8 @@ class Market3 extends StatelessWidget {
                               ),
                               child: TextButton(
                                   onPressed: () {
-                           Navigator.of(context).popUntil((route) => route.settings.name == Lit.id);
-                 Navigator.pushNamed(context, Lit.id);  
+                           Navigator.push(context, MaterialPageRoute(builder: (_)=>Lit()));
+ 
                           
                                   },
                                   child: Text(
@@ -646,8 +646,8 @@ class Market3 extends StatelessWidget {
                       ]),
                     ),
                       onTap: (){
-                             Navigator.of(context).popUntil((route) => route.settings.name == Lit.id);
-                 Navigator.pushNamed(context, Lit.id);  
+                           Navigator.push(context, MaterialPageRoute(builder: (_)=>Lit()));
+ 
                           },
                   ),),
                     SizedBox(
@@ -734,8 +734,8 @@ class Market3 extends StatelessWidget {
                               child: TextButton(
                                   onPressed: () {
                                       
-                           Navigator.of(context).popUntil((route) => route.settings.name == Neo.id);
-                 Navigator.pushNamed(context, Neo.id);  
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>Neo()));
+ 
                         
                                   },
                                   child: Text(
@@ -754,8 +754,8 @@ class Market3 extends StatelessWidget {
                       ]),
                     ),
                       onTap: (){
-                              Navigator.of(context).popUntil((route) => route.settings.name == Neo.id);
-                 Navigator.pushNamed(context, Neo.id);  
+                            Navigator.push(context, MaterialPageRoute(builder: (_)=>Neo()));
+ 
                           },
                   ),),
                      SizedBox(
@@ -841,9 +841,8 @@ class Market3 extends StatelessWidget {
                               ),
                               child: TextButton(
                                   onPressed: () {
-                                      
-                            Navigator.of(context).popUntil((route) => route.settings.name == Xrp.id);
-                 Navigator.pushNamed(context, Xrp.id);  
+                          Navigator.push(context, MaterialPageRoute(builder: (_)=>Xrp()));
+ 
                           
                                   },
                                   child: Text(
@@ -862,8 +861,8 @@ class Market3 extends StatelessWidget {
                       ]),
                     ),
                       onTap: (){
-                              Navigator.of(context).popUntil((route) => route.settings.name == Xrp.id);
-                 Navigator.pushNamed(context, Xrp.id);  
+                            Navigator.push(context, MaterialPageRoute(builder: (_)=>Xrp()));
+ 
                           },
                   ),),
                          ],

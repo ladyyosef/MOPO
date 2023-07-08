@@ -176,8 +176,8 @@ Navigator.pushNamed(context, Pages.id);
                               ]),
                              ),
                              onTap: (){
-                                 Navigator.of(context).popUntil((route) => route.settings.name == Etherem.id);
-Navigator.pushNamed(context, Etherem.id);  
+                                                              Navigator.push(context, MaterialPageRoute(builder: (_) => Etherem()));
+
                              },
                   ),
            SizedBox(height: 20,),
@@ -265,8 +265,8 @@ Navigator.pushNamed(context, Etherem.id);
               ]),
              ),
              onTap: (){
-              Navigator.of(context).popUntil((route) => route.settings.name == Bitcoin.id);
-Navigator.pushNamed(context, Bitcoin.id);  
+                                            Navigator.push(context, MaterialPageRoute(builder: (_) => Bitcoin()));
+
              },
            ),
          

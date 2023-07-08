@@ -135,8 +135,10 @@ Navigator.pushNamed(context, Pages.id);
                 //borderRadius: BorderRadius.circular(15),
 
                 child: TextButton(
-                    onPressed: () {     Navigator.of(context).popUntil((route) => route.settings.name ==Trade1.id);
-Navigator.pushNamed(context, Trade1.id);  },
+                    onPressed: () {  
+                                              Navigator.push(context, MaterialPageRoute(builder: (_) => Trade1()));
+
+ },
                     child: Text(
                       'Offers',
                       style: GoogleFonts.inter(
@@ -256,8 +258,8 @@ Navigator.pushNamed(context, Trade1.id);  },
                     onPressed: () {
                     
                    
-                      Navigator.of(context).popUntil((route) => route.settings.name ==Trade5.id);
-Navigator.pushNamed(context, Trade5.id);  
+                                            Navigator.push(context, MaterialPageRoute(builder: (_) => Trade5()));
+
                     
                     },
                     child: Text(
@@ -373,8 +375,8 @@ Navigator.pushNamed(context, Trade5.id);
                   child: MaterialButton(
                     onPressed: () {
                     
-                     Navigator.of(context).popUntil((route) => route.settings.name ==Trade5.id);
-Navigator.pushNamed(context, Trade5.id);  
+                       Navigator.push(context, MaterialPageRoute(builder: (_) => Trade5()));
+ 
                     
                     },
                     child: Text(
@@ -409,8 +411,8 @@ Navigator.pushNamed(context, Trade5.id);
                   ),
                   child: TextButton(
                   onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.settings.name ==Trade4.id);
-Navigator.pushNamed(context, Trade4.id);  
+                                          Navigator.push(context, MaterialPageRoute(builder: (_) => Trade4()));
+
                   },
                   child: Text(
                     'Create new offer',

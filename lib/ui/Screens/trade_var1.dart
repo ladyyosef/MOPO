@@ -49,8 +49,8 @@ class TradeVar1 extends StatelessWidget {
             children: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).popUntil((route) => route.settings.name == Trade4.id);
-Navigator.pushNamed(context, Trade4.id);  
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => Trade4()));
+
                   },
                   icon: Icon(Icons.arrow_back)),
               SizedBox(
@@ -156,8 +156,8 @@ Navigator.pushNamed(context, Trade4.id);
                   ),
                   child: TextButton(
                   onPressed: () {
-                    Navigator.of(context).popUntil((route) => route.settings.name == TradeVar2.id);
-Navigator.pushNamed(context, TradeVar2.id);  
+                       Navigator.push(context, MaterialPageRoute(builder: (_) => TradeVar2()));
+ 
                   },
                   child: Text(
                     'Next',

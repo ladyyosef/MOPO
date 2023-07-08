@@ -33,6 +33,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widegets/Pages.dart';
 import '../widegets/wallet_appbar.dart';
 import 'Wallet10.dart';
+import 'controllers/CardWallet.dart';
+import 'model/classes.dart';
 //mport 'package:flutter_application_2/ui/widegets/wallet_abbpar.dart';
 
 class Wallet8 extends StatelessWidget {
@@ -290,63 +292,79 @@ Navigator.pushNamed(context, Wallet7.id);
             ),
             SizedBox(height: 20,),
             
-            Container(
-              width: 370,
-              height: 130,
-                                             color:  Color(0xFFDDDBDB).withOpacity(0.4),
-              //padding: EdgeInsets.only(top:20,bottom:15,right: 10,left: 10),
-
-
-              child: Row( mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                Container(
-                  width: 120,
-                  height: 90,
-                  child: Image.asset('assets/images/mastercard.png')),
-                     Container( 
-                             padding: EdgeInsets.only(top:40,bottom:8,right: 5,left: 10),
-                       child: Column(
+            FutureBuilder<List<CreditCard>>(
+              future: CardWalletController.getcard(),
+              builder: (context, snapshot) {
+                 if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final card = snapshot.data!;
+                return Column(
+                  children: [
+                   ...card.map((cd) => Container(
+                      width: 370,
+                      height: 130,
+                                                     color:  Color(0xFFDDDBDB).withOpacity(0.4),
+                      //padding: EdgeInsets.only(top:20,bottom:15,right: 10,left: 10),
+            
+            
+                      child: Row( mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text(
-                                                       "sara all",
-                                                       style: GoogleFonts.lexend(
-                                   color: Color.fromARGB(255, 0, 0, 0),
-                                                         fontSize: 14,
-                                                         fontWeight: FontWeight.bold,
-                                                         
-                                                         //fontWeight: FontWeight.bold,
-                                                       ),
-                                                     
-                                                     ),
-                                                     Text(
-                                                       "3/7/2023",
-                                                       style: GoogleFonts.lexend(
-                                   color: Color(0xFF534C4C),
-                                                         fontSize: 12,
-                                                         fontWeight: FontWeight.bold,
-                                                         
-                                                         //fontWeight: FontWeight.bold,
-                                                       ),
-                                                     
-                                                     ),
-                     
-                        ],
-                                   ),
-                     ),
-                                                 Container(
-                        padding: EdgeInsets.only(top:5,bottom:40,right: 5,left: 40),
-                            child: IconButton(
-  //iconSize: 72,
-  icon:  Image.asset('assets/images/Xicon.png'),
-  onPressed: () {
-     Navigator.of(context).popUntil((route) => route.settings.name ==Wallet10.id);
-Navigator.pushNamed(context, Wallet10.id); 
-                       
-  },
-)),
-                 
-
-              ],),
+                        Container(
+                          width: 120,
+                          height: 90,
+                          child: Image.network(cd.type)),
+                             Container( 
+                                     padding: EdgeInsets.only(top:40,bottom:8,right: 5,left: 10),
+                               child: Column(
+                                children: [
+                                  Text(
+                                                               cd.holderName,
+                                                               style: GoogleFonts.lexend(
+                                           color: Color.fromARGB(255, 0, 0, 0),
+                                                                 fontSize: 14,
+                                                                 fontWeight: FontWeight.bold,
+                                                                 
+                                                                 //fontWeight: FontWeight.bold,
+                                                               ),
+                                                             
+                                                             ),
+                                                             Text(
+                                                               "${cd.expireDate}",
+                                                               style: GoogleFonts.lexend(
+                                           color: Color(0xFF534C4C),
+                                                                 fontSize: 12,
+                                                                 fontWeight: FontWeight.bold,
+                                                                 
+                                                                 //fontWeight: FontWeight.bold,
+                                                               ),
+                                                             
+                                                             ),
+                             
+                                ],
+                                           ),
+                             ),
+                                                         Container(
+                                padding: EdgeInsets.only(top:5,bottom:40,right: 5,left: 40),
+                                    child: IconButton(
+              //iconSize: 72,
+              icon:  Image.asset('assets/images/Xicon.png'),
+              onPressed: () {
+                     Navigator.of(context).popUntil((route) => route.settings.name ==Wallet10.id);
+            Navigator.pushNamed(context, Wallet10.id); 
+                               
+              },
+            )),
+                         
+            
+                      ],),
+                    ),
+                   )
+                  ],
+                );
+              }
             ),
             SizedBox(height: 160,),
             

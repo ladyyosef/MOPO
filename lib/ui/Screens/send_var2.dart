@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_2/ui/Screens/send.dart';
 import 'package:flutter_application_2/ui/Screens/send_var1.dart';
 import 'package:flutter_application_2/ui/Screens/send_var3.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
@@ -37,8 +38,8 @@ class SendVar2 extends StatelessWidget {
             children: [
               IconButton(
                   onPressed: () {
-                   Navigator.of(context).popUntil((route) => route.settings.name == SendVar1.id);
-Navigator.pushNamed(context, SendVar1.id);  
+                     Navigator.push(context, MaterialPageRoute(builder: (_)=>Send()));
+ 
                   },
                   icon: Icon(Icons.arrow_back)),
               SizedBox(
@@ -196,8 +197,8 @@ Navigator.pushNamed(context, SendVar1.id);
  print(VerificationController2.text);
  print(VerificationController3.text);
 
-                      Navigator.of(context).popUntil((route) => route.settings.name == SendVar3.id);
-Navigator.pushNamed(context, SendVar3.id);  
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=>SendVar3()));
+  
                   },
                   child: Text(
                     'Next',

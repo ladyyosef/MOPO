@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_2/ui/Screens/recevie.dart';
 import 'package:flutter_application_2/ui/Screens/recevie_var1.dart';
 import 'package:flutter_application_2/ui/Screens/recevie_var3.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
@@ -39,8 +40,8 @@ class RecevieVar2 extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () {
-                               Navigator.of(context).popUntil((route) => route.settings.name == RecevieVar1.id);
-Navigator.pushNamed(context, Pages.id);  
+                                                   Navigator.push(context, MaterialPageRoute(builder: (_) => Recevie()));
+ 
                     },
                     icon: Icon(Icons.arrow_back)),
                 SizedBox(
@@ -190,9 +191,8 @@ Navigator.pushNamed(context, Pages.id);
                       print(VerificationController1.text);
                        print(VerificationController2.text);
                        print(VerificationController3.text);
+                       Navigator.push(context, MaterialPageRoute(builder: (_) => RecevieVar3()));
 
-                                    Navigator.of(context).popUntil((route) => route.settings.name == RecevieVar3.id);
-Navigator.pushNamed(context, RecevieVar3.id);  
                   
                 },
                 child: Text(

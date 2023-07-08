@@ -185,8 +185,8 @@ SizedBox(height: 20,),
                   ),
                   child: TextButton(
                   onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.settings.name ==TradeVar1.id);
-Navigator.pushNamed(context, TradeVar1.id);  
+                                            Navigator.push(context, MaterialPageRoute(builder: (_) => TradeVar1()));
+
                   },
                   child: Text(
                     'Next',

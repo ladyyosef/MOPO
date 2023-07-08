@@ -45,8 +45,8 @@ class _tradeVar5State extends State<tradeVar5> {
             children: [
               IconButton(
                   onPressed: () {
-                     Navigator.of(context).popUntil((route) => route.settings.name == TradeVar4.id);
-Navigator.pushNamed(context, TradeVar4.id);  
+                       Navigator.push(context, MaterialPageRoute(builder: (_) => TradeVar4()));
+  
                   },
                   icon: Icon(Icons.arrow_back)),
               SizedBox(
@@ -202,8 +202,8 @@ Navigator.pushNamed(context, TradeVar4.id);
                   child: TextButton(
                   onPressed: () {
                     
-                                       Navigator.of(context).popUntil((route) => route.settings.name == TradeVar6.id);
-Navigator.pushNamed(context, TradeVar6.id);  
+                                      Navigator.push(context, MaterialPageRoute(builder: (_) => TradeVar6()));
+
                   
                   },
                   child: Text(

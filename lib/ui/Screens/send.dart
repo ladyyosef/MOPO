@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/ui/Screens/send_var1.dart';
+import 'package:flutter_application_2/ui/Screens/send_var2.dart';
 import 'package:flutter_application_2/ui/Screens/wallet1.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,6 +31,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../data/controllers/api_controller.dart';
 import '../widegets/Pages.dart';
 import '../widegets/drop.dart';
 import '../widegets/opration_appbar.dart';
@@ -39,6 +44,37 @@ class Send extends StatelessWidget {
     var amonteController = TextEditingController();
 
       static String id = "Send";
+      
+      send(BuildContext context) async {
+    final r = await ApiController.post(
+      endpoint: "send",
+      body: {
+        "email": emailController.text,
+       "amount":amonteController.text
+      },
+      onError: (statusCode, body) {},
+    );
+    print(r);
+  
+    Navigator.push(context, MaterialPageRoute(builder: (_) => SendVar2()));
+   
+   
+  }
+
+  bool validateFields() {
+    if (emailController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
+      return false;
+    }
+
+    if (amonteController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
+      return false;
+    }
+
+    // إذا وصلت هنا، فإن جميع الحقول غير فارغة
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -183,10 +219,11 @@ SizedBox(height: 20,),
                 borderRadius: BorderRadius.circular(15),
                   ),
                   child: TextButton(
-                  onPressed: () {
-                     Navigator.of(context).popUntil((route) => route.settings.name == SendVar1.id);
-Navigator.pushNamed(context, SendVar1.id);  
-                  },
+                  onPressed: () async {
+                if (validateFields()) {
+                  await send(context);
+                }
+              },
                   child: Text(
                     'Next',
                     style: GoogleFonts.lexendExa(

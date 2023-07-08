@@ -135,8 +135,8 @@ Navigator.pushNamed(context, Trade2.id);
 
               child: TextButton(
                   onPressed: () {
-                    Navigator.of(context).popUntil((route) => route.settings.name ==Trade1.id);
-Navigator.pushNamed(context, Trade1.id);  
+                       Navigator.push(context, MaterialPageRoute(builder: (_) => Trade1()));
+ 
                   },
                   child: Text(
                     'Offers',
@@ -263,8 +263,8 @@ Navigator.pushNamed(context, Trade1.id);
                 ),
                 child: MaterialButton(
                   onPressed: () {
-                 Navigator.of(context).popUntil((route) => route.settings.name ==Trade5.id);
-Navigator.pushNamed(context, Trade5.id);  
+                   Navigator.push(context, MaterialPageRoute(builder: (_) => Trade5()));
+  
                   },
                   child: Text(
                     'GET',
@@ -390,8 +390,8 @@ Navigator.pushNamed(context, Trade5.id);
                 ),
                 child: MaterialButton(
                   onPressed: () {
-                   Navigator.of(context).popUntil((route) => route.settings.name ==Trade5.id);
-Navigator.pushNamed(context, Trade5.id);  
+                     Navigator.push(context, MaterialPageRoute(builder: (_) => Trade5()));
+ 
                   },
                   child: Text(
                     'GET',
@@ -517,8 +517,8 @@ Navigator.pushNamed(context, Trade5.id);
                 ),
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.of(context).popUntil((route) => route.settings.name ==Trade5.id);
-Navigator.pushNamed(context, Trade5.id);  
+                       Navigator.push(context, MaterialPageRoute(builder: (_) => Trade5()));
+
                   },
                   child: Text(
                     'GET',
@@ -644,8 +644,8 @@ Navigator.pushNamed(context, Trade5.id);
                 ),
                 child: MaterialButton(
                   onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.settings.name ==Trade5.id);
-Navigator.pushNamed(context, Trade5.id);  
+                         Navigator.push(context, MaterialPageRoute(builder: (_) => Trade5()));
+  
                   },
                   child: Text(
                     'GET',
@@ -771,8 +771,8 @@ Navigator.pushNamed(context, Trade5.id);
                 ),
                 child: MaterialButton(
                   onPressed: () {
-                     Navigator.of(context).popUntil((route) => route.settings.name ==Trade5.id);
-Navigator.pushNamed(context, Trade5.id);  
+                         Navigator.push(context, MaterialPageRoute(builder: (_) => Trade5()));
+  
                   },
                   child: Text(
                     'GET',
@@ -898,8 +898,8 @@ Navigator.pushNamed(context, Trade5.id);
                 ),
                 child: MaterialButton(
                   onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.settings.name ==Trade5.id);
-Navigator.pushNamed(context, Trade5.id);  
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => Trade5()));
+  
                   },
                   child: Text(
                     'GET',
@@ -955,8 +955,8 @@ Navigator.pushNamed(context, Trade5.id);
                   ),
                   child: TextButton(
                       onPressed: () {
-                         Navigator.of(context).popUntil((route) => route.settings.name ==Trade5.id);
-Navigator.pushNamed(context, Trade5.id);  
+                             Navigator.push(context, MaterialPageRoute(builder: (_) => Trade5()));
+ 
                       },
                       child: Text(
                         'now',

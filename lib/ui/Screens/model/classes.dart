@@ -150,3 +150,54 @@ class CurrencyData {
     };
   }
 }
+class Item {
+  int id;
+  int quantity;
+  String name;
+  String abbreviation;
+  double price;
+  int percentage;
+
+  Item({
+    required this.id,
+    required this.quantity,
+    required this.name,
+    required this.abbreviation,
+    required this.price,
+    required this.percentage,
+  });
+
+  factory Item.fromJson(Map<String, dynamic> json) {
+    return Item(
+      id: json['id'],
+      quantity: json['quantity'],
+      name: json['name'],
+      abbreviation: json['Abbrevation'],
+      price: json['price'].toDouble(),
+      percentage: json['percentage'],
+    );
+  }
+}
+
+class CreditCard {
+  int id;
+  String holderName;
+  String type;
+  DateTime expireDate;
+
+  CreditCard({
+    required this.id,
+    required this.holderName,
+    required this.type,
+    required this.expireDate,
+  });
+
+  factory CreditCard.fromJson(Map<String, dynamic> json) {
+    return CreditCard(
+      id: json['id'],
+      holderName: json['Holder_Name'],
+      type: json['type'],
+      expireDate: DateTime.parse(json['Expire_Date']),
+    );
+  }
+}
