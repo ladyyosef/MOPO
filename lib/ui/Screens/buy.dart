@@ -30,16 +30,48 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../data/controllers/api_controller.dart';
 import '../widegets/Pages.dart';
 import '../widegets/opration_appbar.dart';
 import 'buy_var1.dart';
+import 'buy_var2.dart';
 import 'home.dart';
 
 class NBuy extends StatelessWidget {
    NBuy({Key? key}) : super(key: key);
     static String id = "NBuy";
-      var from = TextEditingController();
-    var to = TextEditingController();
+      var fromController = TextEditingController();
+    var toController = TextEditingController();
+      send(BuildContext context) async {
+    final r = await ApiController.post(
+      endpoint: "buy",
+      body: {
+        "currency_id_in": fromController.text,
+       "currency_id_out":toController.text
+      },
+      onError: (statusCode, body) {},
+    );
+    print(r);
+  
+    Navigator.push(context, MaterialPageRoute(builder: (_) => BuyVar2()));
+   
+   
+  }
+
+  bool validateFields() {
+    if (toController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
+      return false;
+    }
+
+    if (toController.text.isEmpty) {
+      // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
+      return false;
+    }
+
+    // إذا وصلت هنا، فإن جميع الحقول غير فارغة
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +91,7 @@ class NBuy extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () {
-                   Navigator.of(context).popUntil((route) => route.settings.name == Wallet1.id);
+                   Navigator.of(context).popUntil((route) => route.settings.name == Wallet6.id);
 Navigator.pushNamed(context, Pages.id);     
                 },
                 icon: Icon(Icons.arrow_back)),
@@ -110,7 +142,7 @@ Navigator.pushNamed(context, Pages.id);
                            color:  Color(0xFFE7E6E6),
     
                           child: TextFormField(
-                            controller: from,
+                            controller: fromController,
                             keyboardType: TextInputType.number,
                             // obscureText: true,
                             onFieldSubmitted: (String value) {
@@ -162,7 +194,7 @@ Navigator.pushNamed(context, Pages.id);
                            color:  Color(0xFFE7E6E6),
     
                           child: TextFormField(
-                            controller: to,
+                            controller: toController,
                             keyboardType: TextInputType.number,
                             // obscureText: true,
                             onFieldSubmitted: (String value) {
@@ -201,8 +233,8 @@ Navigator.pushNamed(context, Pages.id);
                             ),
                             child: TextButton(
                             onPressed: () {
-                                 Navigator.of(context).pop((route) => route.settings.name == BuyVar1.id);
-    Navigator.pushNamed(context, BuyVar1.id);     
+                               Navigator.push(context, MaterialPageRoute(builder: (_) => BuyVar2()));
+    
                             },
                             child: Text(
                               'Next',

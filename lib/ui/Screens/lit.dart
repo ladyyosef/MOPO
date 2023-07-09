@@ -271,8 +271,8 @@ Navigator.pushNamed(context, Pages.id);
         ),
         child: TextButton(
             onPressed: () {
-                   Navigator.of(context).popUntil((route) => route.settings.name == NBuy.id);
-Navigator.pushNamed(context, NBuy.id);     
+                                                 Navigator.push(context, MaterialPageRoute(builder: (_) => NBuy()));
+
             },
             child: Text(
               'Buy',

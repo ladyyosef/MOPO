@@ -53,8 +53,8 @@ Column(
                     ),
                     child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).popUntil((route) => route.settings.name ==Wallet2.id);
-Navigator.pushNamed(context, Wallet2.id);  
+                                               Navigator.push(context, MaterialPageRoute(builder: (_) => Wallet2()));
+ 
                         },
                         child: Text(
                           'Let\'s create your wallet',

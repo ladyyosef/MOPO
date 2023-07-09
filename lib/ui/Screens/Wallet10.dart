@@ -277,7 +277,7 @@ Navigator.pushNamed(context, Wallet7.id);
                         child: TextButton(
                         onPressed: () {},
                         child: Text(
-                          'Cart',
+                          'Card',
                           style: GoogleFonts.inter(
                                color:  Color(0xFF4B0B8A),
                             fontSize: 16,
