@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/ui/Screens/Wallet6.dart';
+import 'package:flutter_application_2/ui/Screens/controllers/WalletController.dart';
 import 'package:flutter_application_2/ui/Screens/etherem.dart';
 import 'package:flutter_application_2/ui/Screens/lit.dart';
 import 'package:flutter_application_2/ui/Screens/market1.dart';
@@ -25,19 +26,41 @@ class Pages extends StatefulWidget {
 
   @override
   State<Pages> createState() => _PagesState();
-
 }
 
 class _PagesState extends State<Pages> {
-   
   int selectedIndex = 0;
-  List<Widget> pages = const[
+  List<Widget> pages = const [
     Home(),
     Market1(),
     Wallet1(),
     Profile8(),
   ];
-       
+
+  @override
+  void initState() {
+    super.initState();
+
+    WalletController.getCards().then((value) {
+      if (value.isNotEmpty) {
+        pages = [
+          Home(),
+          Market1(),
+          Wallet6(),
+          Profile8(),
+        ];
+      } else {
+        pages = [
+          Home(),
+          Market1(),
+          Wallet1(),
+          Profile8(),
+        ];
+      }
+
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

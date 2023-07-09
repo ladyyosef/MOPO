@@ -24,9 +24,6 @@ class ShowAccount {
   }
 }
 
-
-
-
 class ShowUser {
   String fullName;
   String email;
@@ -58,6 +55,7 @@ class ShowUser {
     };
   }
 }
+
 class Card {
   int cardNumber;
   String holderName;
@@ -83,6 +81,7 @@ class Card {
     );
   }
 }
+
 class Wallet {
   int quantity;
 
@@ -94,6 +93,7 @@ class Wallet {
     );
   }
 }
+
 class Trade {
   final int price;
   final int quantity;
@@ -107,13 +107,14 @@ class Trade {
     );
   }
 }
+
 class CurrencyData {
   int id;
   String logo;
   String currencyName;
   String abbreviation;
-  double newPrice;
-  double oldPrice;
+  double? newPrice;
+  double? oldPrice;
   double percentage;
 
   CurrencyData({
@@ -132,8 +133,8 @@ class CurrencyData {
       logo: json['logo'],
       currencyName: json['Currency_name'],
       abbreviation: json['Abbrevation'],
-      newPrice: json['new_price'].toDouble(),
-      oldPrice: json['old_price'].toDouble(),
+      newPrice: json['new_price']?.toDouble(),
+      oldPrice: json['old_price']?.toDouble(),
       percentage: json['percentage'].toDouble(),
     );
   }
@@ -150,12 +151,13 @@ class CurrencyData {
     };
   }
 }
+
 class Item {
   int id;
   int quantity;
   String name;
   String abbreviation;
-  double price;
+  double? price;
   int percentage;
 
   Item({
@@ -173,7 +175,7 @@ class Item {
       quantity: json['quantity'],
       name: json['name'],
       abbreviation: json['Abbrevation'],
-      price: json['price'].toDouble(),
+      price: json['price']?.toDouble(),
       percentage: json['percentage'],
     );
   }

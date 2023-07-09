@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -38,9 +40,24 @@ import 'controllers/CardWallet.dart';
 import 'model/classes.dart';
 //mport 'package:flutter_application_2/ui/widegets/wallet_abbpar.dart';
 
-class Wallet7 extends StatelessWidget {
+class Wallet7 extends StatefulWidget {
   const Wallet7({key});
-    static String id = "Wallet7";
+  static String id = "Wallet7";
+
+  @override
+  State<Wallet7> createState() => _Wallet7State();
+}
+
+class _Wallet7State extends State<Wallet7> {
+  final streamControlelr = StreamController<List<CreditCard>>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    CardWalletController.getcard()
+        .then((value) => streamControlelr.sink.add(value));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +96,9 @@ class Wallet7 extends StatelessWidget {
                       'assets/images/send.png',
                     ),
                     onPressed: () {
-                          Navigator.of(context).popUntil((route) => route.settings.name ==Send.id);
-Navigator.pushNamed(context, Send.id); 
+                      Navigator.of(context)
+                          .popUntil((route) => route.settings.name == Send.id);
+                      Navigator.pushNamed(context, Send.id);
                     },
                   ),
                 ),
@@ -110,8 +128,9 @@ Navigator.pushNamed(context, Send.id);
                       'assets/images/rec.png',
                     ),
                     onPressed: () {
-                         Navigator.of(context).popUntil((route) => route.settings.name ==Recevie.id);
-Navigator.pushNamed(context, Recevie.id); 
+                      Navigator.of(context).popUntil(
+                          (route) => route.settings.name == Recevie.id);
+                      Navigator.pushNamed(context, Recevie.id);
                     },
                   ),
                 ),
@@ -141,8 +160,8 @@ Navigator.pushNamed(context, Recevie.id);
                       'assets/images/buy.png',
                     ),
                     onPressed: () {
-                     Navigator.push(context, MaterialPageRoute(builder: (_)=>NBuy()));
- 
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => NBuy()));
                     },
                   ),
                 ),
@@ -172,8 +191,8 @@ Navigator.pushNamed(context, Recevie.id);
                       'assets/images/trade.png',
                     ),
                     onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>Trade1()));
- 
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => Trade1()));
                     },
                   ),
                 ),
@@ -218,8 +237,9 @@ Navigator.pushNamed(context, Recevie.id);
 
                 child: TextButton(
                     onPressed: () {
-                          Navigator.of(context).popUntil((route) => route.settings.name ==Wallet6.id);
-Navigator.pushNamed(context, Pages.id); 
+                      Navigator.of(context).popUntil(
+                          (route) => route.settings.name == Wallet6.id);
+                      Navigator.pushNamed(context, Pages.id);
                     },
                     child: Text(
                       'Coins',
@@ -265,138 +285,81 @@ Navigator.pushNamed(context, Pages.id);
         SizedBox(
           height: 20,
         ),
-        FutureBuilder<List<CreditCard>>(
-          future: CardWalletController.getcard(),
-          builder: (context, snapshot) {
-           
-                   if (!snapshot.hasData) {
-              return Center(
-                child: CircularProgressIndicator(),
+        StreamBuilder<List<CreditCard>>(
+            stream: streamControlelr.stream,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              final card = snapshot.data!;
+              return Column(
+                children: [
+                  ...card.map(
+                    (cd) => Container(
+                      width: 370,
+                      height: 130,
+                      color: Color(0xFFDDDBDB).withOpacity(0.4),
+                      //padding: EdgeInsets.only(top:20,bottom:15,right: 10,left: 10),
+
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                              width: 120,
+                              height: 90,
+                              child: Image.network(cd.type)),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: 40, bottom: 8, right: 5, left: 10),
+                            child: Column(
+                              children: [
+                                Text(
+                                  cd.holderName,
+                                  style: GoogleFonts.lexend(
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+
+                                    //fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "${cd.expireDate.year}-${cd.expireDate.month}-${cd.expireDate.day}",
+                                  style: GoogleFonts.lexend(
+                                    color: Color(0xFF534C4C),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+
+                                    //fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                              padding: EdgeInsets.only(
+                                  top: 5, bottom: 40, right: 5, left: 40),
+                              child: IconButton(
+                                //iconSize: 72,
+                                icon: Image.asset('assets/images/Xicon.png'),
+                                onPressed: () async {
+                                  await CardWalletController.deletecard(cd.id);
+                                  streamControlelr.sink.add(
+                                      await CardWalletController.getcard());
+                                },
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
               );
-            }
-            final card = snapshot.data!;
-            return Column(
-              children: [
-                ...card.map((cd) =>  Container(
-                  width: 370,
-                  height: 130,
-                  color: Color(0xFFDDDBDB).withOpacity(0.4),
-                  //padding: EdgeInsets.only(top:20,bottom:15,right: 10,left: 10),
-        
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                          width: 120,
-                          height: 90,
-                          child: Image.network(cd.type)),
-                      Container(
-                        padding:
-                            EdgeInsets.only(top: 40, bottom: 8, right: 5, left: 10),
-                        child: Column(
-                          children: [
-                            Text(
-                              cd.holderName,
-                              style: GoogleFonts.lexend(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-        
-                                //fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "${cd.expireDate}",
-                              style: GoogleFonts.lexend(
-                                color: Color(0xFF534C4C),
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-        
-                                //fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                          padding:
-                              EdgeInsets.only(top: 5, bottom: 40, right: 5, left: 40),
-                          child: IconButton(
-                            //iconSize: 72,
-                            icon: Image.asset('assets/images/Xicon.png'),
-                            onPressed: () {
-                             Navigator.of(context).popUntil((route) => route.settings.name ==Wallet8.id);
-        Navigator.pushNamed(context, Wallet8.id); 
-                            },
-                          )),
-                    ],
-                  ),
-                ),),
-                SizedBox(
-                  height: 20,
-                ),
-                ...card.map((cd) =>  Container(
-                  width: 370,
-                  height: 130,
-                  color: Color(0xFFDDDBDB).withOpacity(0.4),
-                  //padding: EdgeInsets.only(top:20,bottom:15,right: 10,left: 10),
-        
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                          width: 120,
-                          height: 90,
-                          child: Image.network(cd.type)),
-                      Container(
-                        padding:
-                            EdgeInsets.only(top: 40, bottom: 8, right: 5, left: 10),
-                        child: Column(
-                          children: [
-                            Text(
-                            cd.holderName,
-                              style: GoogleFonts.lexend(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-        
-                                //fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "${cd.expireDate}",
-                              style: GoogleFonts.lexend(
-                                color: Color(0xFF534C4C),
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-        
-                                //fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                          padding:
-                              EdgeInsets.only(top: 5, bottom: 40, right: 5, left: 40),
-                          child: IconButton(
-                            //iconSize: 72,
-                            icon: Image.asset('assets/images/Xicon.png'),
-                            onPressed: () {
-                                 Navigator.of(context).popUntil((route) => route.settings.name ==Wallet9.id);
-        Navigator.pushNamed(context, Wallet9.id); 
-                            },
-                          )),
-                    ],
-                  ),
-                ),),
-                SizedBox(
-                  height: 25,
-                ),
-              ],
-            );
-          }
-        ),
+            }),
         Container(
           padding: EdgeInsets.only(top: 1, bottom: 1, right: 30, left: 30),
           // width: 80,
@@ -410,8 +373,9 @@ Navigator.pushNamed(context, Pages.id);
               )),
           child: TextButton(
               onPressed: () {
-                    Navigator.of(context).popUntil((route) => route.settings.name ==Wallet2.id);
-Navigator.pushNamed(context, Wallet2.id); 
+                Navigator.of(context)
+                    .popUntil((route) => route.settings.name == Wallet2.id);
+                Navigator.pushNamed(context, Wallet2.id);
               },
               child: Text(
                 'Add another one',

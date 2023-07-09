@@ -44,6 +44,7 @@ class Wallet2 extends StatefulWidget {
 
 class _Wallet2State extends State<Wallet2> {
   Color borderColor = Color(0xFF4B0B8A);
+  bool isVisaSelected = true;
   String type = "";
 
   @override
@@ -101,12 +102,16 @@ class _Wallet2State extends State<Wallet2> {
                   height: 130,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: borderColor, width: 3),
+                    border: Border.all(
+                        color:
+                            !isVisaSelected ? Color(0xFF4B0B8A) : Colors.yellow,
+                        width: 3),
                   ),
                   child: Center(child: Image.asset('assets/images/m2.png'))),
               onTap: () {
                 setState(() {
                   type = "master";
+                  isVisaSelected = false;
                   borderColor = Color(
                       0xFF4B0B8A); // تحديث لون الحدود عند النقر على الصورة
                 });
@@ -119,15 +124,16 @@ class _Wallet2State extends State<Wallet2> {
                 height: 130,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: Colors.yellow, width: 3),
+                  border: Border.all(
+                      color: isVisaSelected ? Color(0xFF4B0B8A) : Colors.yellow,
+                      width: 3),
                 ),
                 child: Center(child: Image.asset('assets/images/v2.png')),
               ),
               onTap: () {
-                  type = "visa";
+                type = "visa";
                 setState(() {
-                  
-
+                  isVisaSelected = true;
                   borderColor = Color(
                       0xFF4B0B8A); // تحديث لون الحدود عند النقر على الصورة
                 });

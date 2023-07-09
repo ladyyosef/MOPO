@@ -389,7 +389,11 @@ class Market2 extends StatelessWidget {
                     ),
                     onTap: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => Lit()));
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => Lit(
+                                    currencyId: curr.id,
+                                  )));
                     },
                   ),
                 ),

@@ -13,10 +13,12 @@ class ApiController {
   static Future<String> get(
       {required String endpoint,
       Map<String, String> headers_ = const {}}) async {
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final response = await http.get(Uri.parse(baseUrl + endpoint),
-        headers: ApiController.headers..addAll(headers_)..addAll(token != null
+        headers: ApiController.headers
+          ..addAll(headers_)
+          ..addAll(token != null
               ? {HttpHeaders.authorizationHeader: 'Bearer $token'}
               : {}));
     return response.body;
@@ -38,6 +40,28 @@ class ApiController {
               ? {HttpHeaders.authorizationHeader: 'Bearer $token'}
               : {}),
         body: body);
+    if (response.statusCode >= 400) {
+      onError(response.statusCode, response.body);
+    }
+    return response.body;
+  }
+
+  static Future<String> delete(
+      {required String endpoint,
+      Map<String, String> headers = const {},
+      required Function(int statusCode, String body) onError}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    print(token);
+
+    final response = await http.delete(
+      Uri.parse(baseUrl + endpoint),
+      headers: ApiController.headers
+        ..addAll(headers)
+        ..addAll(token != null
+            ? {HttpHeaders.authorizationHeader: 'Bearer $token'}
+            : {}),
+    );
     if (response.statusCode >= 400) {
       onError(response.statusCode, response.body);
     }

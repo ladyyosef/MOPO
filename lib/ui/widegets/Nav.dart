@@ -21,18 +21,14 @@ Widget browserBottomNavBar(
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         unselectedFontSize: 10,
         items: [
-        // BottomNavigationBarItem(label: 'home',icon:
-         // Icon(Icons.home) ),
-          BottomNavigationBarItem(label: 'Home',icon:
-         Icon(Icons.home) ),
-          BottomNavigationBarItem(label: 'Market',icon:
-         Icon(Icons.shopify_sharp) ),
-          BottomNavigationBarItem(label: 'Wallet',icon:
-         Icon(Icons.wallet) ),
-          BottomNavigationBarItem(label: 'Profile',icon:
-         Icon(Icons.account_circle) ),
-
-
+          // BottomNavigationBarItem(label: 'home',icon:
+          // Icon(Icons.home) ),
+          BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
+          BottomNavigationBarItem(
+              label: 'Market', icon: Icon(Icons.shopify_sharp)),
+          BottomNavigationBarItem(label: 'Wallet', icon: Icon(Icons.wallet)),
+          BottomNavigationBarItem(
+              label: 'Profile', icon: Icon(Icons.account_circle)),
         ]);
 
   //      Widget StdNav (

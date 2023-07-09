@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/ui/Screens/Wallet6.dart';
 import 'package:flutter_application_2/ui/Screens/controllers/HomeController.dart';
+import 'package:flutter_application_2/ui/Screens/controllers/ShowUserController.dart';
 import 'package:flutter_application_2/ui/Screens/etherem.dart';
 import 'package:flutter_application_2/ui/Screens/lit.dart';
 import 'package:flutter_application_2/ui/Screens/market1.dart';
@@ -48,35 +49,44 @@ class Home extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(left: 15, right: 15, top: 50),
             child: Column(children: [
-              Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xFFFAFF00), width: 2),
-                        borderRadius: BorderRadius.circular(30)),
-                    child: CircleAvatar(
-                      maxRadius: 30,
-                      minRadius: 30,
-                      backgroundColor: Colors.white,
-                      child: Icon(
-                        Icons.person,
-                        size: 45,
-                        color: Color(0xFF4B0B8A),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'lady abo alenin',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Color(0xFF4B0B8A),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+              FutureBuilder<ShowUser>(
+                  future: ShowUserController.getUser(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    final user = snapshot.data!;
+                    return Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Color(0xFFFAFF00), width: 2),
+                              borderRadius: BorderRadius.circular(30)),
+                          child: CircleAvatar(
+                            maxRadius: 30,
+                            minRadius: 30,
+                            backgroundColor: Colors.white,
+                            child: Icon(
+                              Icons.person,
+                              size: 45,
+                              color: Color(0xFF4B0B8A),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          user.fullName,
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Color(0xFF4B0B8A),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    );
+                  }),
               Divider(
                 color: Color(0xFFFAFF00),
                 thickness: 4,
@@ -578,8 +588,12 @@ class Home extends StatelessWidget {
                                 ),
                               ),
                               onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (_) => Lit()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => Lit(
+                                              currencyId: curr.id,
+                                            )));
                               }),
                         ),
                         SizedBox(

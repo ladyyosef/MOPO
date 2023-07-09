@@ -16,10 +16,45 @@ class WalletController {
     print(response);
     //فك تشفير json
     //وتحويله الى ليست 'date'
-     return (jsonDecode(response)['data'] as List)
+    return (jsonDecode(response)['data'] as List)
         //تحويل كل عنصر من ال (json) الcours
         .map((json) => Item.fromJson(json))
         //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
         .toList();
+  }
+
+  static Future<List<CreditCard>> getCards() async {
+    final response = await ApiController.get(endpoint: "card");
+    print(response);
+    //فك تشفير json
+    //وتحويله الى ليست 'date'
+    return (jsonDecode(response)['data'] as List)
+        //تحويل كل عنصر من ال (json) الcours
+        .map((json) => CreditCard.fromJson(json))
+        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
+        .toList();
+  }
+}
+
+class CreditCard {
+  int id;
+  String holderName;
+  String type;
+  DateTime expireDate;
+
+  CreditCard({
+    required this.id,
+    required this.holderName,
+    required this.type,
+    required this.expireDate,
+  });
+
+  factory CreditCard.fromJson(Map<String, dynamic> json) {
+    return CreditCard(
+      id: json['id'],
+      holderName: json['Holder_Name'],
+      type: json['type'],
+      expireDate: DateTime.parse(json['Expire_Date']),
+    );
   }
 }

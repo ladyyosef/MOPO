@@ -122,7 +122,7 @@ class MyApp extends StatelessWidget {
         Etherem.id: (context) => Etherem(),
         Help.id: (context) => Help(),
         Language.id: (context) => Language(),
-        Lit.id: (context) => Lit(),
+        // Lit.id: (context) => Lit(),
         Logout.id: (context) => Logout(),
         Market1.id: (context) => Market1(),
         Market2.id: (context) => Market2(),

@@ -8,18 +8,18 @@ import 'package:http/http.dart' as http;
 import '../model/classes.dart';
 
 class WatichlistController {
-  static Future<List<CurrencyData>> getcurrency() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
-    print(token);
-    final response = await ApiController.get(endpoint: "home/watchlist");
+  static Future<List<CurrencyData>> getcurrency([String search = '']) async {
+    final response =
+        await ApiController.get(endpoint: "home/watchlist?search=$search");
     print(response);
     //فك تشفير json
     //وتحويله الى ليست 'date'
-     return (jsonDecode(response)['data'] as List)
+    final list = (jsonDecode(response)['data'] as List)
         //تحويل كل عنصر من ال (json) الcours
         .map((json) => CurrencyData.fromJson(json))
         //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
         .toList();
+    print(list.length);
+    return list;
   }
 }
