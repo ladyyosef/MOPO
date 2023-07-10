@@ -30,12 +30,7 @@ class Pages extends StatefulWidget {
 
 class _PagesState extends State<Pages> {
   int selectedIndex = 0;
-  List<Widget> pages = const [
-    Home(),
-    Market1(),
-    Wallet1(),
-    Profile8(),
-  ];
+  List<Widget> pages = const [];
 
   @override
   void initState() {
@@ -73,7 +68,11 @@ class _PagesState extends State<Pages> {
               selectedIndex = Index;
             });
           }),
-      body: pages.elementAt(selectedIndex),
+      body: pages.isEmpty
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : pages.elementAt(selectedIndex),
     ));
   }
 }
