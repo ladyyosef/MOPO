@@ -115,33 +115,7 @@ Navigator.pushNamed(context, Privce.id);     },
 Navigator.pushNamed(context, Language.id);     },
            ),
             SizedBox(height: 6,),
-            Divider(color: Color(0xFFFAFF00),),
-          SizedBox(height: 12,),
-                      GestureDetector(
-             child: Container(
-              height: 55,
-                      color: Color(0xFFFAFF00).withOpacity(0.4),
-               child: Row(children: [
-                     
-                  
-                   Icon(Icons.favorite,size: 25,color: Color(0xFFEE4F41),),
-                  
-                       
-                       
-                       SizedBox(width: 12,),
-                       Text(
-                      'Preferred Currencies',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Color(0xFF000000),
-                          //fontWeight: FontWeight.bold
-                          ),
-                    ),
-                     ],),
-             ),
-             onTap: (){   Navigator.of(context).popUntil((route) => route.settings.name == Preferred_currencies.id);
-Navigator.pushNamed(context, Preferred_currencies.id);     },
-           ), 
+         
             SizedBox(height: 6,),
             Divider(color: Color(0xFFFAFF00)),
           SizedBox(height: 12,),          GestureDetector(
