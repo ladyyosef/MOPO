@@ -160,19 +160,19 @@ class Lit extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  padding: EdgeInsets.only(
-                      top: 20, bottom: 30, right: 180, left: 10),
-                  child: Text(
-                    "MARKET OVERVIEW ",
-                    style: GoogleFonts.lexendExa(
-                      color: Color(0xFF4B0B8A),
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                ff(),
+                // Container(
+                //   padding: EdgeInsets.only(
+                //       top: 20, bottom: 30, right: 180, left: 10),
+                //   child: Text(
+                //     "MARKET OVERVIEW ",
+                //     style: GoogleFonts.lexendExa(
+                //       color: Color(0xFF4B0B8A),
+                //       fontSize: 14,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
+                // ff(),
                 Container(
                   padding: EdgeInsets.only(
                       top: 10, bottom: 10, right: 180, left: 20),

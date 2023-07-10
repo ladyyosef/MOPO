@@ -305,134 +305,15 @@ class _Market2State extends State<Market2> {
                       ),
                       onTap: () {
                         Navigator.push(
-                            context, MaterialPageRoute(builder: (_) => Usdt()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => Lit(
+                                      currencyId: curr.id,
+                                    )));
                       }),
                 ),
                 SizedBox(
                   height: 20,
-                ),
-                ...currency.map(
-                  (curr) => GestureDetector(
-                    child: Container(
-                      width: 350,
-                      height: 80,
-                      padding: EdgeInsets.only(
-                          top: 10, bottom: 5, right: 5, left: 10),
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFFFFFF),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.network(curr.logo),
-                          Text(
-                            curr.abbreviation,
-                            style: GoogleFonts.inter(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_circle_up,
-                            color: Color(0xFF4ECB71),
-                          ),
-                          Text(
-                            "${curr.percentage}",
-                            style: GoogleFonts.inter(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Image.asset("assets/images/GreenM2.png"),
-                          Text(
-                            "${curr.newPrice}\$",
-                            style: GoogleFonts.inter(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => Bitcoin()));
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ...currency.map(
-                  (curr) => GestureDetector(
-                    child: Container(
-                      width: 350,
-                      height: 80,
-                      padding: EdgeInsets.only(
-                          top: 10, bottom: 5, right: 5, left: 10),
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFFFFFF),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.network(curr.logo),
-                          Text(
-                            curr.abbreviation,
-                            style: GoogleFonts.inter(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_circle_down,
-                            color: Color.fromARGB(255, 203, 78, 78),
-                          ),
-                          Text(
-                            "${curr.percentage}",
-                            style: GoogleFonts.inter(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Image.asset("assets/images/RedM2.png"),
-                          Text(
-                            "${curr.newPrice}\$",
-                            style: GoogleFonts.inter(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => Lit(
-                                    currencyId: curr.id,
-                                  )));
-                    },
-                  ),
                 ),
                 Row(
                   children: [
