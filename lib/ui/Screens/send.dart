@@ -14,6 +14,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/ui/Screens/send_var1.dart';
 import 'package:flutter_application_2/ui/Screens/send_var2.dart';
+import 'package:flutter_application_2/ui/Screens/trade_var5.dart';
 import 'package:flutter_application_2/ui/Screens/wallet1.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -71,9 +72,7 @@ class Send extends StatelessWidget {
     );
     print(r);
 
-    if (isSuccess) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => SendVar2()));
-    }
+    if (isSuccess) {}
   }
 
   int currencyId = 1;
@@ -240,7 +239,12 @@ class Send extends StatelessWidget {
             child: TextButton(
                 onPressed: () async {
                   if (validateFields()) {
-                    await send(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => tradeVar5(
+                                  function: send,
+                                )));
                   }
                 },
                 child: Text(

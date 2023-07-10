@@ -155,7 +155,7 @@ class MyApp extends StatelessWidget {
         TradeVar2.id: (context) => TradeVar2(),
         TradeVar3.id: (context) => TradeVar3(),
         TradeVar4.id: (context) => TradeVar4(),
-        tradeVar5.id: (context) => tradeVar5(),
+        // tradeVar5.id: (context) => tradeVar5(),
         TradeVar6.id: (context) => TradeVar6(),
         Usdt.id: (context) => Usdt(),
         Wallet1.id: (context) => Wallet1(),
