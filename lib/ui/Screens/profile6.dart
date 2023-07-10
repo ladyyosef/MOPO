@@ -24,9 +24,8 @@ class Profile6 extends StatelessWidget {
       required this.fullName,
       required this.phone,
       required this.password,
-      required this.birthDate, 
-      required this.nationality
-       })
+      required this.birthDate,
+      required this.nationality})
       : super(key: key);
   var PostalCodeController = TextEditingController();
   var CityController = TextEditingController();
@@ -37,8 +36,8 @@ class Profile6 extends StatelessWidget {
   final String fullName;
   final String phone;
   final String birthDate;
-   final String nationality;
-     String place="";
+  final String nationality;
+  String place = "";
   register(BuildContext context) async {
     final r = await ApiController.post(
       endpoint: "register",
@@ -49,9 +48,9 @@ class Profile6 extends StatelessWidget {
         "phone": phone,
         "postal_code": PostalCodeController.text,
         "City": CityController.text,
-        "Nationality":nationality,
-        "Birth_date":birthDate,
-        "place_of_residence":place
+        "Nationality": nationality,
+        "Birth_date": birthDate,
+        "place_of_residence": place
       },
       onError: (statusCode, body) {},
     );
@@ -60,7 +59,6 @@ class Profile6 extends StatelessWidget {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', data['token']);
     Navigator.push(context, MaterialPageRoute(builder: (_) => Profile8()));
-  
   }
 
   bool validateFields() {
@@ -90,9 +88,13 @@ class Profile6 extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .popUntil((route) => route.settings.name == Profile5.id);
-                  Navigator.pushNamed(context, Profile5.id);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => Profile5(
+                                email: email,
+                                password: password,
+                              )));
                 },
                 icon: Icon(Icons.arrow_back)),
             SizedBox(
@@ -140,7 +142,9 @@ class Profile6 extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          MyWidget2(onChanged: (value) => place=value,),
+          MyWidget2(
+            onChanged: (value) => place = value,
+          ),
           SizedBox(
             height: 10,
           ),
@@ -202,7 +206,8 @@ class Profile6 extends StatelessWidget {
             child: TextFormField(
               controller: CityController,
               keyboardType: TextInputType.name,
-              obscureText: true,
+              obscureText: false
+              ,
               onFieldSubmitted: (String value) {
                 print(value);
               },
@@ -214,7 +219,7 @@ class Profile6 extends StatelessWidget {
                   borderRadius: BorderRadius.circular(19),
                 ),
                 // labelText: 'password',
-                suffix: Icon(Icons.show_chart_outlined),
+               // suffix: Icon(Icons.show_chart_outlined),
               ),
             ),
           ),

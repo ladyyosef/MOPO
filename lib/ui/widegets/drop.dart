@@ -25,7 +25,12 @@ class _MyWidgetState extends State<MyWidget> {
 
     WatichlistController.getcurrency().then((value) {
       setState(() {
+
         currency = value;
+        setState(() {
+        currency = value;
+        selectedGender = value.first.id;
+      });
       });
     });
   }

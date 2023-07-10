@@ -34,9 +34,8 @@ class Profile4 extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () {
-                      Navigator.of(context).popUntil(
-                          (route) => route.settings.name == Profile3.id);
-                      Navigator.pushNamed(context, Profile3.id);
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => Profile3()));
+
                     },
                     icon: Icon(Icons.arrow_back)),
                 SizedBox(
@@ -137,9 +136,8 @@ class Profile4 extends StatelessWidget {
         ),
         child: TextButton(
             onPressed: () {
-              Navigator.of(context)
-                  .popUntil((route) => route.settings.name == Profile5.id);
-              Navigator.pushNamed(context, Profile5.id);
+                 //Navigator.push(context, MaterialPageRoute(builder: (_) => Profile5()));
+
             },
             child: Text(
               'next',

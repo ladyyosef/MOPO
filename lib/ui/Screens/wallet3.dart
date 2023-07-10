@@ -115,9 +115,12 @@ class Wallet3 extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            Navigator.of(context).popUntil(
-                                (route) => route.settings.name == Wallet2.id);
-                            Navigator.pushNamed(context, Wallet2.id);
+                               Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => Wallet2(
+                                       
+                                      )));
                           },
                           icon: Icon(Icons.arrow_back)),
                       SizedBox(

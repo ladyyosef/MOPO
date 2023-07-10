@@ -35,9 +35,8 @@ class Profile5 extends StatelessWidget {
       "userName": fullNameController.text,
     });
     if (response['status'] == "success") {
-      Navigator.of(context)
-          .popUntil((route) => route.settings.name == Profile6.id);
-      Navigator.pushNamed(context, Profile6.id);
+        //Navigator.push(context, MaterialPageRoute(builder: (_) => Profile6()));
+
     } else {}
   }
 
@@ -79,8 +78,8 @@ class Profile5 extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Profile3()));
+                     Navigator.push(context, MaterialPageRoute(builder: (_) => Profile3()));
+
                 },
                 icon: Icon(Icons.arrow_back)),
             SizedBox(
