@@ -96,7 +96,7 @@ class _tradeVar5State extends State<tradeVar5> {
           ),
           child: TextFormField(
             controller: passwordController,
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.text,
             obscureText: true,
             onFieldSubmitted: (String value) {
               print(value);
@@ -132,12 +132,13 @@ class _tradeVar5State extends State<tradeVar5> {
           child: TextButton(
               onPressed: () async {
                 bool isSuccess = true;
-                await ApiController.post(
+                final r = await ApiController.post(
                   endpoint: 'authenticate-card',
                   body: {
                     'password': passwordController.text,
                   },
                   onError: (statusCode, body) {
+                    print(body);
                     isSuccess = false;
                     showDialog(
                         context: context,
@@ -151,6 +152,7 @@ class _tradeVar5State extends State<tradeVar5> {
                             ));
                   },
                 );
+                print(r);
                 if (isSuccess) {
                   widget.function(context);
                 }

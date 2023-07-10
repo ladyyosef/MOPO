@@ -12,6 +12,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/ui/Screens/Wallet6.dart';
 import 'package:flutter_application_2/ui/Screens/trade_var1.dart';
+import 'package:flutter_application_2/ui/Screens/trade_var5.dart';
 import 'package:flutter_application_2/ui/Screens/wallet1.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
 import 'package:flutter_application_2/ui/widegets/drop.dart';
@@ -64,7 +65,9 @@ class _NBuyState extends State<NBuy> {
     );
     print(r);
     if (isSuccess) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => BuyVar2()));
+      Navigator.of(context)
+        ..pop()
+        ..pop();
     }
   }
 
@@ -264,7 +267,12 @@ class _NBuyState extends State<NBuy> {
                       child: TextButton(
                           onPressed: () async {
                             if (validateFields()) {
-                              await send(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => tradeVar5(
+                                            function: send,
+                                          )));
                             }
                           },
                           child: Text(

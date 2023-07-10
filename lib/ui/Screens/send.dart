@@ -72,7 +72,11 @@ class Send extends StatelessWidget {
     );
     print(r);
 
-    if (isSuccess) {}
+    if (isSuccess) {
+      Navigator.of(context)
+        ..pop()
+        ..pop();
+    }
   }
 
   int currencyId = 1;
