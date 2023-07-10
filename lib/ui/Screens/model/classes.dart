@@ -28,7 +28,7 @@ class ShowUser {
   String fullName;
   String email;
   String phone;
-  String profileImage;
+  String? profileImage;
 
   ShowUser({
     required this.fullName,
