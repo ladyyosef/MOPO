@@ -12,6 +12,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/data/controllers/api_controller.dart';
 import 'package:flutter_application_2/ui/Screens/trade_var1.dart';
+import 'package:flutter_application_2/ui/Screens/trade_var5.dart';
 import 'package:flutter_application_2/ui/Screens/wallet1.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -190,22 +191,31 @@ class Trade4 extends StatelessWidget {
             ),
             child: TextButton(
                 onPressed: () async {
-                  if (true) {
-                    bool isSuccess = true;
-                    final response = await ApiController.post(
-                      endpoint: 'trade',
-                      body: {
-                        'currency_id_in': currencyInId.toString(),
-                        'currency_id_out': currencyOutId.toString(),
-                        'quantity_in': amount.text,
-                        'quantity_out': amountR.text,
-                      },
-                      onError: (statusCode, body) => isSuccess = false,
+                  if (amount.text.isNotEmpty && amountR.text.isNotEmpty) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => tradeVar5(
+                          function: (context) async {
+                            bool isSuccess = true;
+                            final response = await ApiController.post(
+                              endpoint: 'trade',
+                              body: {
+                                'currency_id_in': currencyInId.toString(),
+                                'currency_id_out': currencyOutId.toString(),
+                                'quantity_in': amount.text,
+                                'quantity_out': amountR.text,
+                              },
+                              onError: (statusCode, body) => isSuccess = false,
+                            );
+                            print(response);
+                            if (isSuccess)
+                              Navigator.of(context)
+                                ..pop()
+                                ..pop();
+                          },
+                        ),
+                      ),
                     );
-                    print(response);
-                    if (isSuccess)
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => TradeVar1()));
                   }
                 },
                 child: Text(

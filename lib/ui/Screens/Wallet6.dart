@@ -651,7 +651,9 @@ class _Wallet6State extends State<Wallet6> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) => Etherem()));
+                                            builder: (_) => Lit(
+                                                  currencyId: curr.id,
+                                                )));
                                   },
                                 ),
                               ),
