@@ -381,9 +381,6 @@ class _Wallet6State extends State<Wallet6> {
                                         'assets/images/send.png',
                                       ),
                                       onPressed: () {
-                                        Navigator.of(context).popUntil(
-                                            (route) =>
-                                                route.settings.name == Send.id);
                                         Navigator.pushNamed(context, Send.id);
                                       },
                                     ),
@@ -414,10 +411,6 @@ class _Wallet6State extends State<Wallet6> {
                                         'assets/images/rec.png',
                                       ),
                                       onPressed: () {
-                                        Navigator.of(context).popUntil(
-                                            (route) =>
-                                                route.settings.name ==
-                                                Recevie.id);
                                         Navigator.pushNamed(
                                             context, Recevie.id);
                                       },
@@ -449,9 +442,6 @@ class _Wallet6State extends State<Wallet6> {
                                         'assets/images/buy.png',
                                       ),
                                       onPressed: () {
-                                        Navigator.of(context).popUntil(
-                                            (route) =>
-                                                route.settings.name == NBuy.id);
                                         Navigator.pushNamed(context, NBuy.id);
                                       },
                                     ),
@@ -482,10 +472,6 @@ class _Wallet6State extends State<Wallet6> {
                                         'assets/images/trade.png',
                                       ),
                                       onPressed: () {
-                                        Navigator.of(context).popUntil(
-                                            (route) =>
-                                                route.settings.name ==
-                                                Trade1.id);
                                         Navigator.pushNamed(context, Trade1.id);
                                       },
                                     ),

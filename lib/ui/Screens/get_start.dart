@@ -63,7 +63,7 @@ class Get_Start extends StatelessWidget {
                         height: 96,
                         child: Center(
                           child: Text(
-                            'Welcom to Mopo',
+                            'Welcome to Mopo',
                             style: GoogleFonts.leckerliOne(
                               color: Colors.black,
                               fontSize: 30,
@@ -102,15 +102,14 @@ class Get_Start extends StatelessWidget {
                         SharedPreferences sharedPreferences =
                             await SharedPreferences.getInstance();
                         final token = sharedPreferences.getString('token');
-                        if (token != null){
-     Navigator.of(context).popUntil(
-                            (route) => route.settings.name == Home.id);
-                        Navigator.pushNamed(context, Pages.id);
-                        }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (_)=>Profile1()));
+                        if (token != null) {
+                          Navigator.of(context).popUntil(
+                              (route) => route.settings.name == Home.id);
+                          Navigator.pushNamed(context, Pages.id);
+                        } else {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => Profile1()));
                         }
-
-                   
                       },
                       child: Center(
                         child: Text('Get start',

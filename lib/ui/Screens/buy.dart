@@ -37,26 +37,40 @@ import 'buy_var1.dart';
 import 'buy_var2.dart';
 import 'home.dart';
 
-class NBuy extends StatelessWidget {
+class NBuy extends StatefulWidget {
   NBuy({Key? key}) : super(key: key);
   static String id = "NBuy";
+
+  @override
+  State<NBuy> createState() => _NBuyState();
+}
+
+class _NBuyState extends State<NBuy> {
   var fromController = TextEditingController();
+
   var toController = TextEditingController();
+
   send(BuildContext context) async {
+    bool isSuccess = true;
     final r = await ApiController.post(
       endpoint: "buy",
       body: {
-        "currency_id_in": fromController.text,
-        "currency_id_out": toController.text
+        "currency_id": currencyId.toString(),
+        "quantity": toController.text
       },
-      onError: (statusCode, body) {},
+      onError: (statusCode, body) {
+        isSuccess = false;
+      },
     );
     print(r);
-
-    Navigator.push(context, MaterialPageRoute(builder: (_) => BuyVar2()));
+    if (isSuccess) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => BuyVar2()));
+    }
   }
 
   int currencyId = 0;
+
+  double currencyPrice = 0;
 
   bool validateFields() {
     if (toController.text.isEmpty) {
@@ -91,11 +105,7 @@ class NBuy extends StatelessWidget {
                       child: Row(
                         children: [
                           IconButton(
-                              onPressed: () {
-                                Navigator.of(context).popUntil((route) =>
-                                    route.settings.name == Wallet6.id);
-                                Navigator.pushNamed(context, Pages.id);
-                              },
+                              onPressed: Navigator.of(context).pop,
                               icon: Icon(Icons.arrow_back)),
                           SizedBox(
                             width: 180.0,
@@ -156,6 +166,11 @@ class NBuy extends StatelessWidget {
                           print(value);
                         },
                         onChanged: (String value) {
+                          toController.text =
+                              (double.parse(value) / currencyPrice)
+                                  .roundToDouble()
+                                  .toString();
+                          setState(() {});
                           print(value);
                         },
                         decoration: InputDecoration(
@@ -205,6 +220,7 @@ class NBuy extends StatelessWidget {
                       height: 58,
                       color: Color(0xFFE7E6E6),
                       child: TextFormField(
+                        enabled: false,
                         controller: toController,
                         keyboardType: TextInputType.number,
                         // obscureText: true,
@@ -229,8 +245,9 @@ class NBuy extends StatelessWidget {
                       height: 15,
                     ),
                     MyWidget(
-                      onChanged: (value) {
+                      onChanged: (value, price) {
                         currencyId = value;
+                        currencyPrice = price;
                       },
                     ),
                     SizedBox(
@@ -245,9 +262,10 @@ class NBuy extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: TextButton(
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => BuyVar2()));
+                          onPressed: () async {
+                            if (validateFields()) {
+                              await send(context);
+                            }
                           },
                           child: Text(
                             'Next',

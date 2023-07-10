@@ -7,7 +7,7 @@ import '../Screens/model/classes.dart';
 class MyWidget extends StatefulWidget {
   const MyWidget({Key? key, this.onChanged}) : super(key: key);
 
-  final Function(int value)? onChanged;
+  final Function(int value, double price)? onChanged;
 
   @override
   State<MyWidget> createState() => _MyWidgetState();
@@ -16,24 +16,31 @@ class MyWidget extends StatefulWidget {
 class _MyWidgetState extends State<MyWidget> {
   int? selectedGender = 1;
 
+  List<CurrencyData> currency = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    TrendingController.getcurrency().then((value) {
+      setState(() {
+        currency = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<CurrencyData>>(
-        future: TrendingController.getcurrency(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final currency = snapshot.data!;
-          return Container(
+    return currency.isEmpty
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : Container(
             color: Color(0xFFFFFFFF),
             padding: EdgeInsets.only(right: 200),
             child: DropdownButton<int>(
               iconSize: 30,
               isExpanded: false,
-
               items: [
                 ...currency.map(
                   (curr) => DropdownMenuItem(
@@ -58,6 +65,12 @@ class _MyWidgetState extends State<MyWidget> {
                 ),
               ],
               onChanged: (int? val) {
+                widget.onChanged!(
+                    val ?? 1,
+                    currency
+                            .firstWhere((element) => element.id == val)
+                            .newPrice ??
+                        .0);
                 setState(() {
                   selectedGender = val;
                 });
@@ -66,6 +79,5 @@ class _MyWidgetState extends State<MyWidget> {
               value: selectedGender, // Set the default value for DropdownButton
             ),
           );
-        });
   }
 }

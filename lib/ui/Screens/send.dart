@@ -39,27 +39,44 @@ import '../widegets/opration_appbar.dart';
 import 'Wallet6.dart';
 
 class Send extends StatelessWidget {
-   Send({Key? key}) : super(key: key);
+  Send({Key? key}) : super(key: key);
   var emailController = TextEditingController();
-    var amonteController = TextEditingController();
+  var amonteController = TextEditingController();
 
-      static String id = "Send";
-      
-      send(BuildContext context) async {
+  static String id = "Send";
+
+  send(BuildContext context) async {
+    bool isSuccess = true;
+    print(currencyId);
     final r = await ApiController.post(
       endpoint: "send",
       body: {
         "email": emailController.text,
-       "amount":amonteController.text
+        "quantity": amonteController.text,
+        "currency_id": currencyId.toString(),
       },
-      onError: (statusCode, body) {},
+      onError: (statusCode, body) {
+        isSuccess = false;
+        showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+                  title: Text(jsonDecode(body)['message']),
+                  actions: [
+                    TextButton(
+                        onPressed: Navigator.of(context).pop,
+                        child: Text('Ok')),
+                  ],
+                ));
+      },
     );
     print(r);
-  
-    Navigator.push(context, MaterialPageRoute(builder: (_) => SendVar2()));
-   
-   
+
+    if (isSuccess) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => SendVar2()));
+    }
   }
+
+  int currencyId = 1;
 
   bool validateFields() {
     if (emailController.text.isEmpty) {
@@ -78,161 +95,165 @@ class Send extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OprationAppbar(child: 
-    Column(children: [
-       Container(
-          width: 425,
-          height: 55,
-          color: Colors.white,
-          child: Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.settings.name == Wallet6.id);
-Navigator.pushNamed(context, Pages.id);  
-                  },
-                  icon: Icon(Icons.arrow_back)),
-              SizedBox(
-                width: 180.0,
-              ),
-              Center(
-                child: Container(
-                    width: 120,
-                    height: 100,
-                    child: Image.asset('assets/images/LogoHome.png')),
-              )
-            ],
+    return OprationAppbar(
+      child: Column(
+        children: [
+          Container(
+            width: 425,
+            height: 55,
+            color: Colors.white,
+            child: Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.arrow_back)),
+                SizedBox(
+                  width: 180.0,
+                ),
+                Center(
+                  child: Container(
+                      width: 120,
+                      height: 100,
+                      child: Image.asset('assets/images/LogoHome.png')),
+                )
+              ],
+            ),
           ),
-        ),
-
-SizedBox(height: 20,),
-        Container(  padding: EdgeInsets.only(top:10,bottom:10,right: 10,left:20),
- color: Color.fromARGB(255, 252, 249, 255),             
-  width: double.infinity,
-                 height: 60,
-
-           child: Text(
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 20),
+            color: Color.fromARGB(255, 252, 249, 255),
+            width: double.infinity,
+            height: 60,
+            child: Text(
               "Send",
               style: GoogleFonts.leckerliOne(
-                color:  Color(0xFF4B0B8A),
+                color: Color(0xFF4B0B8A),
                 fontSize: 22,
-                
+
                 //fontWeight: FontWeight.bold,
               ),
-            
             ),
-         ),
-         SizedBox(height: 30,),
-           Container(
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Container(
             padding: EdgeInsets.only(top: 20, left: 4, right: 290, bottom: 10),
             child: Text(
               'To:',
-               style: GoogleFonts.lexend(
+              style: GoogleFonts.lexend(
                 fontSize: 20,
-                  color:  Color(0xFF4B0B8A),
+                color: Color(0xFF4B0B8A),
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-           Container(
-                width: 365,
-                height: 58,
-                 color:  Color(0xFFE7E6E6),
+          Container(
+            width: 365,
+            height: 58,
+            color: Color(0xFFE7E6E6),
+            child: TextFormField(
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+              // obscureText: true,
+              onFieldSubmitted: (String value) {
+                print(value);
+              },
+              onChanged: (String value) {
+                print(value);
+              },
+              decoration: InputDecoration(
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(2)),
 
-                child: TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  // obscureText: true,
-                  onFieldSubmitted: (String value) {
-                    print(value);
-                  },
-                  onChanged: (String value) {
-                    print(value);
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(2)),
+                labelText: 'Please enter the recipients email',
 
-                    labelText: 'Please enter the recipients email',
-                    
-                    //suffix: Icon(Icons.show_chart_outlined),
-                  ),
-                  //cursorColor: Colors.purple,
-                ),
+                //suffix: Icon(Icons.show_chart_outlined),
               ),
-              SizedBox(height: 30,),
-                         Container(
+              //cursorColor: Colors.purple,
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Container(
             padding: EdgeInsets.only(top: 10, left: 14, right: 250, bottom: 10),
             child: Text(
               'Amount :',
-               style: GoogleFonts.lexend(
+              style: GoogleFonts.lexend(
                 fontSize: 20,
-                  color:  Color(0xFF4B0B8A),
+                color: Color(0xFF4B0B8A),
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-         
-         
-           Container(
-                width: 365,
-                height: 58,
-                 color:  Color(0xFFE7E6E6),
-
-                child: TextFormField(
-                  controller: amonteController,
-                  keyboardType: TextInputType.number,
-                  // obscureText: true,
-                  onFieldSubmitted: (String value) {
-                    print(value);
-                  },
-                  onChanged: (String value) {
-                    print(value);
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(2)),
-
-                    labelText: 'Amont',
-                    
-                    //suffix: Icon(Icons.show_chart_outlined),
-                  ),
-                  //cursorColor: Colors.purple,
-                ),
-              ),SizedBox(height: 15,),
-              MyWidget(),
-         
-         
-         
-          SizedBox(height: 70,),
-                        Container(
-                           width: 280,
-                height: 55,
-                  //padding: EdgeInsets.only(top:5,bottom:5,right: 1,left: 10),
-                      decoration: BoxDecoration(
-               
-                  color:  Color(0xFF4B0B8A),
-                  
-                  
-                  
-                
-                borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: TextButton(
-                  onPressed: () async {
-                if (validateFields()) {
-                  await send(context);
-                }
+          Container(
+            width: 365,
+            height: 58,
+            color: Color(0xFFE7E6E6),
+            child: TextFormField(
+              controller: amonteController,
+              keyboardType: TextInputType.number,
+              // obscureText: true,
+              onFieldSubmitted: (String value) {
+                print(value);
               },
-                  child: Text(
-                    'Next',
-                    style: GoogleFonts.lexendExa(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )),),
-    ],),
+              onChanged: (String value) {
+                print(value);
+              },
+              decoration: InputDecoration(
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(2)),
+
+                labelText: 'Amont',
+
+                //suffix: Icon(Icons.show_chart_outlined),
+              ),
+              //cursorColor: Colors.purple,
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          MyWidget(
+            onChanged: (value, _) {
+              currencyId = value;
+              print(currencyId);
+            },
+          ),
+          SizedBox(
+            height: 70,
+          ),
+          Container(
+            width: 280,
+            height: 55,
+            //padding: EdgeInsets.only(top:5,bottom:5,right: 1,left: 10),
+            decoration: BoxDecoration(
+              color: Color(0xFF4B0B8A),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: TextButton(
+                onPressed: () async {
+                  if (validateFields()) {
+                    await send(context);
+                  }
+                },
+                child: Text(
+                  'Next',
+                  style: GoogleFonts.lexendExa(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
+          ),
+        ],
+      ),
     );
   }
 }
