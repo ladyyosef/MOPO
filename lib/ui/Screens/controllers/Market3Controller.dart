@@ -8,15 +8,16 @@ import 'package:http/http.dart' as http;
 import '../model/classes.dart';
 
 class TrendingController {
-  static Future<List<CurrencyData>> getcurrency() async {
+  static Future<List<CurrencyData>> getcurrency([String search = '']) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     print(token);
-    final response = await ApiController.get(endpoint: "home/trending");
+    final response =
+        await ApiController.get(endpoint: "home/trending?search=$search");
     print(response);
     //فك تشفير json
     //وتحويله الى ليست 'date'
-     return (jsonDecode(response)['data'] as List)
+    return (jsonDecode(response)['data'] as List)
         //تحويل كل عنصر من ال (json) الcours
         .map((json) => CurrencyData.fromJson(json))
         //   إضافة الكائنات المحولة إلى القائمة وإرجاعها

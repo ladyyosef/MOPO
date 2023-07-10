@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -26,9 +28,26 @@ import 'controllers/Market3Controller.dart';
 import 'market1.dart';
 import 'model/classes.dart';
 
-class Market3 extends StatelessWidget {
+class Market3 extends StatefulWidget {
   const Market3({key});
   static String id = "Market3";
+
+  @override
+  State<Market3> createState() => _Market3State();
+}
+
+class _Market3State extends State<Market3> {
+  var Search = TextEditingController();
+
+  final streamControlelr = StreamController<List<CurrencyData>>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    TrendingController.getcurrency()
+        .then((value) => streamControlelr.sink.add(value));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +91,27 @@ class Market3 extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () {
-          showSearch(context: context, delegate: CustomSearch());
-          Navigator.pushNamed(context, Pages.id);
+        onTap: () async {
+          await showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              content: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Search currencies",
+                ),
+                onChanged: (value) => Search.text = value,
+              ),
+              actions: [
+                TextButton(
+                    onPressed: Navigator.of(context).pop,
+                    child: Text('Search')),
+              ],
+            ),
+          );
+          if (Search.text.isNotEmpty) {
+            streamControlelr.sink
+                .add(await TrendingController.getcurrency(Search.text));
+          }
         },
       ),
       Container(
@@ -209,8 +246,8 @@ class Market3 extends StatelessWidget {
       SizedBox(
         height: 20,
       ),
-      FutureBuilder<List<CurrencyData>>(
-          future: TrendingController.getcurrency(),
+      StreamBuilder<List<CurrencyData>>(
+          stream: streamControlelr.stream,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(

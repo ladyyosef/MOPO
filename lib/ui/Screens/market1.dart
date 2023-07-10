@@ -90,7 +90,22 @@ class _Market1State extends State<Market1> {
             ),
           ),
           onTap: () async {
-            showSearch(context: context, delegate: CustomSearch());
+            await showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                content: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Search currencies",
+                  ),
+                  onChanged: (value) => Search.text = value,
+                ),
+                actions: [
+                  TextButton(
+                      onPressed: Navigator.of(context).pop,
+                      child: Text('Search')),
+                ],
+              ),
+            );
             if (Search.text.isNotEmpty) {
               streamControlelr.sink
                   .add(await WatichlistController.getcurrency(Search.text));
