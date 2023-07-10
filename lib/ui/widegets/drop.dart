@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/ui/Screens/controllers/Martket1Controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Screens/controllers/Market3Controller.dart';
@@ -22,7 +23,7 @@ class _MyWidgetState extends State<MyWidget> {
   void initState() {
     super.initState();
 
-    TrendingController.getcurrency().then((value) {
+    WatichlistController.getcurrency().then((value) {
       setState(() {
         currency = value;
       });
