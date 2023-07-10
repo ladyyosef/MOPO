@@ -43,6 +43,7 @@ class _MyWidgetState extends State<MyWidget> {
               iconSize: 30,
               isExpanded: false,
               items: [
+                if (currency.isEmpty) DropdownMenuItem(child: Text('Bit')),
                 ...currency.map(
                   (curr) => DropdownMenuItem(
                     child: Row(
