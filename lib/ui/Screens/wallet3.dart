@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_2/ui/Screens/Wallet5.dart';
 import 'package:flutter_application_2/ui/Screens/wallet2.dart';
 import 'package:flutter_application_2/ui/Screens/wallet4.dart';
 import 'package:flutter_application_2/ui/widegets/currencies.dart';
@@ -38,7 +40,7 @@ import '../widegets/Pages.dart';
 import 'home.dart';
 
 class Wallet3 extends StatelessWidget {
-  Wallet3({key,required this.type});
+  Wallet3({key, required this.type});
   var CvcController = TextEditingController();
   var CardController = TextEditingController();
   var ExpirController = TextEditingController();
@@ -47,6 +49,7 @@ class Wallet3 extends StatelessWidget {
   final String type;
 
   AddCard(BuildContext context) async {
+    final password = getRandomString(10);
     final r = await ApiController.post(
       endpoint: "card",
       body: {
@@ -54,15 +57,23 @@ class Wallet3 extends StatelessWidget {
         "Cvc": CvcController.text,
         "Expire_Date": ExpirController.text,
         "Holder_Name": NameController.text,
-        "type":type
-      
+        "password": password,
+        "type": type
       },
       onError: (statusCode, body) {},
     );
     print(r);
-   
-    Navigator.push(context, MaterialPageRoute(builder: (_) => Wallet4()));
+
+    Navigator.push(context,
+        MaterialPageRoute(builder: (_) => Wallet5(password: password)));
   }
+
+  static const _chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  Random _rnd = Random();
+
+  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
   bool validateFields() {
     if (CardController.text.isEmpty) {
