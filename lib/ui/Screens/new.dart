@@ -131,7 +131,7 @@ Navigator.pushNamed(context, Pages.id);
                           ),
                         ), SizedBox(height: 15,),
                                 Container(color: Colors.white,
-                      padding: EdgeInsets.only(top: 10, left: 14, right: 280, bottom: 10),
+                      padding: EdgeInsets.only(top: 10, left: 14, right: 240, bottom: 10),
                       child: Text(
                         'USD \$',
                          style: GoogleFonts.lexend(

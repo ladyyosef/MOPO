@@ -14,24 +14,18 @@ class WalletController {
     print(token);
     final response = await ApiController.get(endpoint: "wallet");
     print(response);
-    //فك تشفير json
-    //وتحويله الى ليست 'date'
-    return (jsonDecode(response)['data'] as List)
-        //تحويل كل عنصر من ال (json) الcours
+    final data = jsonDecode(response)['data'] as List;
+    final res = (data)
         .map((json) => Item.fromJson(json))
-        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
         .toList();
+    return res;
   }
 
   static Future<List<CreditCard>> getCards() async {
     final response = await ApiController.get(endpoint: "card");
     print(response);
-    //فك تشفير json
-    //وتحويله الى ليست 'date'
     return (jsonDecode(response)['data'] as List)
-        //تحويل كل عنصر من ال (json) الcours
         .map((json) => CreditCard.fromJson(json))
-        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
         .toList();
   }
 }

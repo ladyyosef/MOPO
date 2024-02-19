@@ -14,8 +14,6 @@ class ShowUserController {
     print(token);
     final response = await ApiController.get(endpoint: "ur");
     print(response);
-    //فك تشفير json
-    //وتحويله الى ليست 'date'
     return ShowUser.fromJson(jsonDecode(response)['data']);
   }
 }

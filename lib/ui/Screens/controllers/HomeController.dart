@@ -14,12 +14,11 @@ class HomeController {
     print(token);
     final response = await ApiController.get(endpoint: "home");
     print(response);
-    //فك تشفير json
-    //وتحويله الى ليست 'date'
+    
     return (jsonDecode(response)['data'] as List)
-        //تحويل كل عنصر من ال (json) الcours
+    
         .map((json) => CurrencyData.fromJson(json))
-        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
+       
         .toList();
   }
 
@@ -29,8 +28,7 @@ class HomeController {
     print(token);
     final response = await ApiController.get(endpoint: "home/currency/$id");
     print(response);
-    //فك تشفير json
-    //وتحويله الى ليست 'date'
+   
     return CurrencyData.fromJson(
         (jsonDecode(response)['data'] as Map<String, dynamic>));
   }

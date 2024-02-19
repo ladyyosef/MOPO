@@ -166,6 +166,7 @@ class Item {
     required this.name,
     required this.abbreviation,
     required this.price,
+
     required this.percentage,
   });
 

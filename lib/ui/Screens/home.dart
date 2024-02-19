@@ -517,7 +517,7 @@ class Home extends StatelessWidget {
                                         minRadius: 25,
                                         backgroundColor: Colors.white,
                                         backgroundImage:
-                                            NetworkImage(curr.logo),
+                                            NetworkImage(curr.logo,),
                                       ),
                                     ),
                                     Container(
@@ -542,7 +542,7 @@ class Home extends StatelessWidget {
                                           Text(
                                             "${curr.percentage}%",
                                             style: GoogleFonts.lexendExa(
-                                              color: Color(0xFFB82727),
+                                              color: Color.fromARGB(255, 39, 184, 61),
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold,
 

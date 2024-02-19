@@ -31,21 +31,7 @@ class Profile3 extends StatelessWidget {
 
 
   static String id = "Profile3";
-//   SingUp(BuildContext context) async {
-//     var response = await _crud.postReequest(LinkRegister, {
-//       "email": emailController.text,
-//       "password": passwordController.text,
-//     });
-//     if (response['status'] == "success") {
-//  Navigator.of(context).popUntil(
-//                         (route) => route.settings.name == Profile4.id);
-//                     Navigator.pushNamed(context, Profile4.id);
-//                      } else
-//                       {
-//                      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Profile4()));
 
-//                     }
-//   }
   register(BuildContext context) async {
     final r = await ApiController.post(
       endpoint: "register",
@@ -226,14 +212,6 @@ class Profile3 extends StatelessWidget {
       ),
     ]));
 
-    // Scaffold(
-    //   body:  Column(
-    //     children: [
-
-    //     ],
-    //   ),
-    // );
+    
   }
 }
-// decoration:
-//  BoxDecoration(borderRadius: BorderRadius.circular(14)),

@@ -20,12 +20,8 @@ class ShowAccountController {
       },
     );
     print(response.body);
-    //فك تشفير json
-    //وتحويله الى ليست 'date'
     return (jsonDecode(response.body)['data'] as List)
-        //تحويل كل عنصر من ال (json) الcours
         .map((json) => ShowAccount.fromJson(json))
-        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
         .toList();
   }
 }

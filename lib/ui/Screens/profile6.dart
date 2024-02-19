@@ -48,9 +48,9 @@ class Profile6 extends StatelessWidget {
         "phone": phone,
         "postal_code": PostalCodeController.text,
         "City": CityController.text,
-        "Nationality": nationality,
+        "Nationality": /*nationality*/"Syrian",/**mai */
         "Birth_date": birthDate,
-        "place_of_residence": place
+        "place_of_residence": /*place*/"Syria"/*mai*/
       },
       onError: (statusCode, body) {},
     );
@@ -71,7 +71,7 @@ class Profile6 extends StatelessWidget {
       // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
       return false;
     }
-
+//mai editing
     // إذا وصلت هنا، فإن جميع الحقول غير فارغة
     return true;
   }

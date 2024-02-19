@@ -150,47 +150,5 @@ class Profile4 extends StatelessWidget {
       ),
     ]));
 
-//     Scaffold(
-//       body: Column(
-//         children: [
-//           Image.asset('assets/images/Line 1.png'),
-//           SizedBox(
-//             height: 10,
-//           ),
-//           Stack(
-//             children: [
-//               Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 children: [
-//                   Container(
-//                     width: 425,
-//                     height: 69,
-//                     color: Colors.white,
-//                     child: Row(
-//                       children: [
-//                         Container(
-//                             padding: EdgeInsets.all(14),
-//                             child: Icon(Icons.arrow_back)),
-//                         SizedBox(
-//                           width: 140.0,
-//                         ),
-//                         Image.asset('assets/images/LogoHome.png')
-//                       ],
-//                     ),
-//                   ),
-//                   SizedBox(
-//                     height: 1,
-//                   ),
-
-//                    Image.asset('assets/images/RectangleTop.png'),
-
-//                 ],
-//               )
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
   }
 }

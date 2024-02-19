@@ -38,34 +38,20 @@ class Profile2 extends StatelessWidget {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', data['token']);
     Navigator.push(context, MaterialPageRoute(builder: (_)=>Profile8()));
-    // var response = await curd.postReequest(LinkLogin,
-    //     {"email": emailController.text, "password": passwordController.text});
-    // if (response['status'] == "success") {
-    //   Navigator.of(context)
-    //       .popUntil((route) => route.settings.name == Profile8.id);
-    //   Navigator.pushNamed(context, Profile8.id);
-    //   // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Profile4()));
-    // } else {
-    //   AwesomeDialog(
-    //           context: context,
-    //           title: "warning",
-    //           body: Text("the password not corect"))
-    //       .show();
-    //   }
+   
   }
 
   bool validateFields() {
     if (emailController.text.isEmpty) {
-      // عرض رسالة تحذيرية بالنسبة لحقل البريد الإلكتروني
+      
       return false;
     }
 
     if (passwordController.text.isEmpty) {
-      // عرض رسالة تحذيرية بالنسبة لحقل كلمة المرور
+      
       return false;
     }
 
-    // إذا وصلت هنا، فإن جميع الحقول غير فارغة
     return true;
   }
 

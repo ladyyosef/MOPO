@@ -15,12 +15,11 @@ class BestValueController {
     final response =
         await ApiController.get(endpoint: "home/best-value?search=$search");
     print(response);
-    //فك تشفير json
-    //وتحويله الى ليست 'date'
+
     return (jsonDecode(response)['data'] as List)
-        //تحويل كل عنصر من ال (json) الcours
+     
         .map((json) => CurrencyData.fromJson(json))
-        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
+
         .toList();
   }
 }

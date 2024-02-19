@@ -14,12 +14,11 @@ class CardWalletController {
     print(token);
     final response = await ApiController.get(endpoint: "card");
     print(response);
-    //فك تشفير json
-    //وتحويله الى ليست 'date'
+   
     return (jsonDecode(response)['data'] as List)
-        //تحويل كل عنصر من ال (json) الcours
+       
         .map((json) => CreditCard.fromJson(json))
-        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
+  
         .toList();
   }
 
